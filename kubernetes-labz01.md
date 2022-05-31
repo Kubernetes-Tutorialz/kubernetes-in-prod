@@ -20,6 +20,7 @@
   - [Manifestos do Kubernetes: Use sempre o `YML` para acessar os manifestos](#manifestos-do-kubernetes-use-sempre-o-yml-para-acessar-os-manifestos)
   - [O `YML` mais enxuto depois de analisado](#o-yml-mais-enxuto-depois-de-analisado)
   - [Criando nosso POD com `kubectl apply`](#criando-nosso-pod-com-kubectl-apply)
+  - [Simulando a criacao do POD](#simulando-a-criacao-do-pod)
 
 ## Primeiros passos com Kubernetes
 
@@ -535,6 +536,9 @@ pod/nginx created
 # kubectl delete -f primeiro_pod_nginx.yml
 pod "nginx" deleted
 ```
+
+### Simulando a criacao do POD
+
 10.3.b. Tambem posso simular uma criacao de *POD* ja com o `YML`:
 
 ```bash
