@@ -6,9 +6,10 @@
   - [Sumario](#sumario)
 - [Primeiros passos com Kubernetes](#primeiros-passos-com-kubernetes)
   - [Listando nossos nodes com `kubectl get nodes`:](#listando-nossos-nodes-com-kubectl-get-nodes)
+  - [Antes de prosseguir alguns conceitos...](#antes-de-prosseguir-alguns-conceitos)
+  - [Usando o comando `kubectl describe` para mais detalhes](#usando-o-comando-kubectl-describe-para-mais-detalhes)
     - [Concepts](#concepts)
     - [Concepts](#concepts-1)
-    - [Concepts](#concepts-2)
 
 ## Primeiros passos com Kubernetes
 
@@ -24,12 +25,14 @@ kube-worker01           Ready    <none>                 9h     v1.23.1
 kube-worker2            Ready    <none>                 114s   v1.23.1
 localhost.localdomain   Ready    control-plane,master   10h    v1.23.1
 ```
-#### Concepts
+### Antes de prosseguir alguns conceitos... 
 
 - no Kubernetes temos nodes *worker* e nodes *master*.
 - no master vai ter o APIserver, gerencia do meu cluster.
   - se os nodes etstao saudaveis, se ele esta comunicando com o *master*.
 - por default o *master* nao recebe containers, somente nos *workers*.
+
+### Usando o comando `kubectl describe` para mais detalhes
 
 2. Vamos agora testar o comando `kubectl describe` para ver os detalhes do master:
 
