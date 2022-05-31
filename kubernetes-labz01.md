@@ -4,13 +4,13 @@
 
 - [Kubernetes](#kubernetes)
   - [Sumario](#sumario)
-  - [Primeiros passos com Kubernetes](#primeiros-passos-com-kubernetes)
+- [Primeiros passos com Kubernetes](#primeiros-passos-com-kubernetes)
   - [Listando nossos nodes com `kubectl get nodes`:](#listando-nossos-nodes-com-kubectl-get-nodes)
     - [Concepts](#concepts)
     - [Concepts](#concepts-1)
     - [Concepts](#concepts-2)
 
-### Primeiros passos com Kubernetes
+## Primeiros passos com Kubernetes
 
 ### Listando nossos nodes com `kubectl get nodes`:
 
