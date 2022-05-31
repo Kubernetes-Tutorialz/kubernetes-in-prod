@@ -8,6 +8,9 @@
   - [Listando nossos nodes com `kubectl get nodes`:](#listando-nossos-nodes-com-kubectl-get-nodes)
   - [Antes de prosseguir alguns conceitos...](#antes-de-prosseguir-alguns-conceitos)
   - [Usando o comando `kubectl describe` para mais detalhes](#usando-o-comando-kubectl-describe-para-mais-detalhes)
+  - [Adicionando novcs nodes ao cluster](#adicionando-novcs-nodes-ao-cluster)
+  - [Ativando o auto-complete para sistemas Red Hat](#ativando-o-auto-complete-para-sistemas-red-hat)
+  - [Buscando os POD's do namespace `kube-systems`](#buscando-os-pods-do-namespace-kube-systems)
     - [Concepts](#concepts)
     - [Concepts](#concepts-1)
 
@@ -68,6 +71,7 @@ Conditions:
   Ready                True    Sat, 05 Mar 2022 13:57:52 -0300   Sun, 27 Feb 2022 12:40:03 -0300   KubeletReady                 kubelet is posting ready status
 Addresses:
 ```
+### Adicionando novcs nodes ao cluster
 
 3. Agora vamos executar um comando para adicionar novos nodes ao cluster:
 
@@ -75,6 +79,8 @@ Addresses:
 # kubeadm token create --print-join-command
 kubeadm join 192.168.1.114:6434 --token j7ivmo.up6haifmk55pou7c --discovery-token-ca-cert-hash sha256:3fc69efd6451dedb945ce665bdf436ac3e54e0e55774fb0654b60562677944f7
 ```
+
+### Ativando o auto-complete para sistemas Red Hat
 
 4. Para ativar o auto-complete Red Hat based:
 
@@ -87,6 +93,8 @@ $ yum install bash-completion -y ; kubectl completion bash > /etc/bash_completio
 ```bash
 $ source <(kubectl completion bash)
 ```
+
+### Buscando os POD's do namespace `kube-systems`
 
 6. Vamos agora descrever um POD:
 
