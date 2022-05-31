@@ -11,8 +11,15 @@
   - [Adicionando novcs nodes ao cluster](#adicionando-novcs-nodes-ao-cluster)
   - [Ativando o auto-complete para sistemas Red Hat](#ativando-o-auto-complete-para-sistemas-red-hat)
   - [Buscando os POD's do namespace `kube-systems`](#buscando-os-pods-do-namespace-kube-systems)
-    - [Concepts](#concepts)
-    - [Concepts](#concepts-1)
+    - [Entendendo que um POD tambem tem mais de um container](#entendendo-que-um-pod-tambem-tem-mais-de-um-container)
+  - [Visualizando os namespaces](#visualizando-os-namespaces)
+  - [Visualizando namespaces dos POD's ativos](#visualizando-namespaces-dos-pods-ativos)
+  - [Criando um namespace](#criando-um-namespace)
+  - [Criando um novo POD com `kubectl run`](#criando-um-novo-pod-com-kubectl-run)
+  - [Analisando o POD criado](#analisando-o-pod-criado)
+  - [Manifestos do Kubernetes: Use sempre o `YML` para acessar os manifestos](#manifestos-do-kubernetes-use-sempre-o-yml-para-acessar-os-manifestos)
+  - [O `YML` mais enxuto depois de analisado](#o-yml-mais-enxuto-depois-de-analisado)
+  - [Criando nosso POD com `kubectl apply`](#criando-nosso-pod-com-kubectl-apply)
 
 ## Primeiros passos com Kubernetes
 
@@ -115,7 +122,8 @@ weave-net-cqvn8                     2/2     Running   2 (3d1h ago)   6d3h
 weave-net-tfskb                     2/2     Running   2 (3d1h ago)   6d3h
 ```
 
-#### Concepts
+#### Entendendo que um POD tambem tem mais de um container
+
 - um POD por ter mais de um container veja o caso acima do `weave-net-bkc5w`.
   - esses containers compartlha o mesmo IP, nome, mesmo namespace.
   - `namespace`: funciona como um cercado, voce tem maior controle da sua app.
@@ -216,6 +224,7 @@ Containers:
       /home/weave/launch.sh
 ```
 
+### Visualizando os namespaces
 
 7. Para visualizar todos os namespaces dos meus PODS ativos:
 
@@ -235,6 +244,8 @@ kube-system   weave-net-bkc5w                     2/2     Running   3 (3d1h ago)
 kube-system   weave-net-cqvn8                     2/2     Running   2 (3d1h ago)   6d4h
 kube-system   weave-net-tfskb                     2/2     Running   2 (3d1h ago)   6d3h
 ```
+
+### Visualizando namespaces dos POD's ativos
 
 - Para visualizar todos os namespaces dos meus PODS ativos:
 
@@ -266,7 +277,8 @@ kube-public       Active   44h
 kube-system       Active   44h
 ```
 
-#### Concepts
+### Criando um namespace
+
 - esses `namespaces` sao padroes do Kubernetes.
 
 8.1.  Vamos agora criar um novo *namespace*, para isso devemos executar o comando abaixo:
@@ -288,6 +300,8 @@ kube-public       Active   44h
 kube-system       Active   44h
 ```
 
+### Criando um novo POD com `kubectl run`
+
 9. Criando agora um novo *POD* (quando ele executa o comando run ele cria um POD):
 
 ```bash
@@ -302,6 +316,8 @@ pod/nginx created
 NAME    READY   STATUS    RESTARTS      AGE
 nginx   1/1     Running   1 (98m ago)   35h
 ```
+
+### Analisando o POD criado
 
 9.2 Vendo mais detalhes desse *POD*:
 
@@ -364,6 +380,8 @@ Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists fo
                              node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
 Events:                      <none>
 ```
+
+### Manifestos do Kubernetes: Use sempre o `YML` para acessar os manifestos
 
 10. Agora quero visualizar mais detalhes do *POD* do nginx, buscando o manifesto (objeto YML) no formato `yml`:
 
@@ -481,6 +499,8 @@ status:
 # kubectl get pods nginx -o yaml >> meu_primeiro_pod_nginx.yml
 ```
 
+### O `YML` mais enxuto depois de analisado
+
 10.2. Nosso `yml` file modificado:
 
 ```yml
@@ -499,6 +519,8 @@ spec:
   dnsPolicy: ClusterFirst
   restartPolicy: Always
 ```
+
+### Criando nosso POD com `kubectl apply`
 
 10.3. Agora sim vamos criar nosso primeiro POD e usar ele no meu namesoace `devops`:
 
