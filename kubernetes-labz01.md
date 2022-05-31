@@ -11,7 +11,7 @@
   - [Adicionando novcs nodes ao cluster](#adicionando-novcs-nodes-ao-cluster)
   - [Ativando o auto-complete para sistemas Red Hat](#ativando-o-auto-complete-para-sistemas-red-hat)
   - [Buscando os POD's do namespace `kube-systems`](#buscando-os-pods-do-namespace-kube-systems)
-    - [Entendendo que um POD tambem tem mais de um container](#entendendo-que-um-pod-tambem-tem-mais-de-um-container)
+  - [Entendendo que um POD tambem tem mais de um container](#entendendo-que-um-pod-tambem-tem-mais-de-um-container)
   - [Visualizando os namespaces](#visualizando-os-namespaces)
   - [Visualizando namespaces dos POD's ativos](#visualizando-namespaces-dos-pods-ativos)
   - [Criando um namespace](#criando-um-namespace)
@@ -123,7 +123,7 @@ weave-net-cqvn8                     2/2     Running   2 (3d1h ago)   6d3h
 weave-net-tfskb                     2/2     Running   2 (3d1h ago)   6d3h
 ```
 
-#### Entendendo que um POD tambem tem mais de um container
+### Entendendo que um POD tambem tem mais de um container
 
 - um POD por ter mais de um container veja o caso acima do `weave-net-bkc5w`.
   - esses containers compartlha o mesmo IP, nome, mesmo namespace.
