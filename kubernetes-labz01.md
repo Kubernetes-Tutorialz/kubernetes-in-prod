@@ -577,7 +577,7 @@ pod/nginx created
 10.4. Se eu listar agora meu *namespace* eu posso ver meu *POD*:
 
 ```bash
-]# kubectl get pods -n devops
+# kubectl get pods -n devops
 NAME    READY   STATUS    RESTARTS   AGE
 nginx   1/1     Running   0          2m21s
 ```
