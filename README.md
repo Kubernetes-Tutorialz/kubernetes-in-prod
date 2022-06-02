@@ -20,6 +20,8 @@ k3s: Desenvolvido pela Rancher Labs, é um concorrente direto do MicroK8s, poden
 k0s: Desenvolvido pela Mirantis, mesma empresa que adquiriu a parte enterprise do Docker. É uma distribuição do Kubernetes com todos os recursos necessários para funcionar em um único binário, que proporciona uma simplicidade na instalação e manutenção do cluster. A pronúncia é correta é kay-zero-ess e tem por objetivo reduzir o esforço técnico e desgaste na instalação de um cluster Kubernetes, por isso o seu nome faz alusão a Zero Friction. O k0s pode ser utilizado em ambientes de produção
 
 
+## Componentes do Kubernetes
+
 
 
 ## Contributing
