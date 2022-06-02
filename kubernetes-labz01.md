@@ -22,7 +22,11 @@
   - [Criando nosso POD com `kubectl apply`](#criando-nosso-pod-com-kubectl-apply)
   - [Simulando a criacao do POD](#simulando-a-criacao-do-pod)
 - [Services](#services)
-    - [Concepts](#concepts)
+  - [Criando o primeiro service](#criando-o-primeiro-service)
+    - [Usando o comando `expose`](#usando-o-comando-expose)
+  - [Detalhes do service](#detalhes-do-service)
+  - [Como editar um service usando o comando `kubectl edit`](#como-editar-um-service-usando-o-comando-kubectl-edit)
+  - [Analisando o `YML` do meu service](#analisando-o-yml-do-meu-service)
 
 ## Primeiros passos com Kubernetes
 
@@ -625,6 +629,8 @@ NAME    READY   STATUS    RESTARTS   AGE
 nginx   1/1     Running   0          4h45m
 ```
 
+### Criando o primeiro service
+
 2.  Agora vamos usar um outro comando para criar nosso *service*:
 
 ```bash
@@ -632,7 +638,7 @@ nginx   1/1     Running   0          4h45m
 error: couldn't find port via --port flag or introspection
 See 'kubectl expose -h' for help and examples
 ```
-#### Concepts
+#### Usando o comando `expose`
 - veja que ele retornou um erro pedindo para setar a porta.
 - vamos usar o `YML` para subir com a porta.
 
@@ -711,6 +717,8 @@ Commercial support is available at
 </html>
 ```
 
+### Detalhes do service
+
 8.  Veja agora mais detalhes do *service*:
 
 ```bash
@@ -731,6 +739,8 @@ Endpoints:         10.44.0.1:80
 Session Affinity:  None
 Events:            <none>
 ```
+
+### Como editar um service usando o comando `kubectl edit`
 
 9.  Vamos editar nosso *service* do *NGINX*:
 
@@ -763,6 +773,8 @@ Commercial support is available at nginx.com.
 
 Thank you for using nginx.
 ```
+
+### Analisando o `YML` do meu service
 
 11. Pegando o `YML` do meu *service*:
 
