@@ -22,6 +22,7 @@ k0s: Desenvolvido pela Mirantis, mesma empresa que adquiriu a parte enterprise d
 
 ## Componentes do Kubernetes
 
+![k8s-cluster](images/k8sss.png)
 
 
 ## Contributing
