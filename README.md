@@ -22,8 +22,9 @@ k0s: Desenvolvido pela Mirantis, mesma empresa que adquiriu a parte enterprise d
 
 ## Componentes do Kubernetes
 
-![k8s-cluster](images/k8sss.png)
+Esse é o diagrama de um cluster Kubernetes com todos os componentes interligados.
 
+![k8s-cluster](images/k8sss.png)
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
