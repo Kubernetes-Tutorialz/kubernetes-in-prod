@@ -23,7 +23,7 @@
   - [Simulando a criacao do POD](#simulando-a-criacao-do-pod)
 - [Services](#services)
   - [Criando o primeiro service](#criando-o-primeiro-service)
-    - [Usando o comando `expose`](#usando-o-comando-expose)
+  - [Usando o comando `expose`](#usando-o-comando-expose)
   - [Detalhes do service](#detalhes-do-service)
   - [Como editar um service usando o comando `kubectl edit`](#como-editar-um-service-usando-o-comando-kubectl-edit)
   - [Analisando o `YML` do meu service](#analisando-o-yml-do-meu-service)
@@ -638,7 +638,7 @@ nginx   1/1     Running   0          4h45m
 error: couldn't find port via --port flag or introspection
 See 'kubectl expose -h' for help and examples
 ```
-#### Usando o comando `expose`
+### Usando o comando `expose`
 - veja que ele retornou um erro pedindo para setar a porta.
 - vamos usar o `YML` para subir com a porta.
 
