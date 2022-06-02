@@ -27,9 +27,9 @@
   - [Detalhes do service](#detalhes-do-service)
   - [Como editar um service usando o comando `kubectl edit`](#como-editar-um-service-usando-o-comando-kubectl-edit)
   - [Analisando o `YML` do meu service](#analisando-o-yml-do-meu-service)
-- [Kubernetes CLI abreviations](#kubernetes-cli-abreviations)
-  - [Primeiros passos com Kubernetes - Parte 3](#primeiros-passos-com-kubernetes---parte-3)
+- [Explicando os comandos do Kubernetes](#explicando-os-comandos-do-kubernetes)
   - [Encadeamento de Comandos](#encadeamento-de-comandos)
+  - [Comandos do Kubernetes abreviados](#comandos-do-kubernetes-abreviados)
 
 ## Primeiros passos com Kubernetes
 
@@ -816,9 +816,7 @@ status:
   loadBalancer: {}  
 ```
 
-## Kubernetes CLI abreviations
-
-### Primeiros passos com Kubernetes - Parte 3
+## Explicando os comandos do Kubernetes
 
 1.  Podemos tambem usar um comando que mostra detalhes de cada componente do k8s:
 
@@ -875,6 +873,8 @@ NAME                   ENDPOINTS            AGE
 endpoints/kubernetes   192.168.0.234:6443   6d12h
 endpoints/nginx        10.44.0.1:80         112m
 ```
+
+### Comandos do Kubernetes abreviados
 
 3.  Podemos usar abreviacoes de comandos:
 
