@@ -6,7 +6,8 @@
 - [Sumario](#sumario)
 - [Services](#services)
   - [Verificando o cluster antes de comecar](#verificando-o-cluster-antes-de-comecar)
-    - [Analisando se o cluster esta com `ClusterIP`](#analisando-se-o-cluster-esta-com-clusterip)
+    - [Analisando se o cluster tem `ClusterIP`](#analisando-se-o-cluster-tem-clusterip)
+    - [Criando um service usando `YML`](#criando-um-service-usando-yml)
 
 
 
@@ -46,7 +47,7 @@ d) Analisando se temos *replica-set*:
 No resources found in default namespace.
 ```
 
-#### Analisando se o cluster esta com `ClusterIP`
+#### Analisando se o cluster tem `ClusterIP`
 
 2.  Uma coisa importante que precisamos saber, quando eu criei meu service veja ele veio com o *type* setado como *ClusterIP*.
 
@@ -87,6 +88,8 @@ Commercial support is available at
 </body>
 </html>
 ```
+
+#### Criando um service usando `YML`
 
 3.  Vamos agora criar um *service*:
 
