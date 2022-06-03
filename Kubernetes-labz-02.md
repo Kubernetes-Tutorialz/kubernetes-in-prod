@@ -47,6 +47,15 @@ d) Analisando se temos *replica-set*:
 No resources found in default namespace.
 ```
 
+
+
+
+
+
+
+
+
+
 #### Analisando se o cluster tem `ClusterIP`
 
 2.  Uma coisa importante que precisamos saber, quando eu criei meu service veja ele veio com o *type* setado como *ClusterIP*.

@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2022-06-03T02:16:05Z"
+  labels:
+    app: mix
+  name: mix
+  namespace: monitoring-prod
+  resourceVersion: "1260032"
+  uid: 88e64011-f862-4839-964d-1f7c95334487
+spec:
+  clusterIP: 10.105.91.27
+  clusterIPs:
+  - 10.105.91.27
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: mix
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

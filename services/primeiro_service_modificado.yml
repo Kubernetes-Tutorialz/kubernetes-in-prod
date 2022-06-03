@@ -1,0 +1,24 @@
+kind: Service
+metadata:
+  labels:
+    app: mix
+  name: mix
+  namespace: monitoring-prod
+spec:
+  clusterIP: 10.105.91.27
+  clusterIPs:
+  - 10.105.91.27
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: mix
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
