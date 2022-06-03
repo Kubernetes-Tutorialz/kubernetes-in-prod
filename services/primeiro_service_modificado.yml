@@ -20,5 +20,3 @@ spec:
     app: mix
   sessionAffinity: None
   type: ClusterIP
-status:
-  loadBalancer: {}
