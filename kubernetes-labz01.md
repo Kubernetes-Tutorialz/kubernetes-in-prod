@@ -644,6 +644,8 @@ See 'kubectl expose -h' for help and examples
 ### Usando o comando `expose`
 - veja que ele retornou um erro pedindo para setar a porta.
 - vamos usar o `YML` para subir com a porta.
+- **ClusterIP** serve apenas executar dentro do cluster.
+- **NodePort** serve para ser acessado de fora do cluster (ele tras uma porta de 30000 ate 32500)
 
 3.  Agora que editei a porta no `YML` file vamos executar de novo o comando `expose`:
 
