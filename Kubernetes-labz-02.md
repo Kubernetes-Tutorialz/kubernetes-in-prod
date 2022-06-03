@@ -1,9 +1,9 @@
 ## Kubernetes
 
-### Sumario
+## Sumario
 
 - [Kubernetes](#kubernetes)
-  - [Sumario](#sumario)
+- [Sumario](#sumario)
 - [Services](#services)
   - [Verificando o cluster antes de comecar](#verificando-o-cluster-antes-de-comecar)
     - [Analisando se o cluster esta com `ClusterIP`](#analisando-se-o-cluster-esta-com-clusterip)
