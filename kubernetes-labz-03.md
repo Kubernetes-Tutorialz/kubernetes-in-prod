@@ -15,6 +15,8 @@
     - [Pegando os PODS somente da Holanda](#pegando-os-pods-somente-da-holanda)
     - [Pegando os PODS somente da outra regiao de UK](#pegando-os-pods-somente-da-outra-regiao-de-uk)
     - [Agora pegando os LABELS](#agora-pegando-os-labels)
+  - [Replicaset](#replicaset)
+    - [Criando o primeiro replicaset no Kubernetes](#criando-o-primeiro-replicaset-no-kubernetes)
 
 ### Deployments
 Toda vez que eu crio um deployment sabemos que ele vai criar um replicaset, o deployment que gerencia o replicaset.
@@ -205,5 +207,28 @@ Veja que ele adiciona tambem um outra coluna na saida do comando
 NAME                                  READY   STATUS    RESTARTS   AGE   DC
 primeiro-deployment-57c778d58-lz4pk   1/1     Running   0          22m   UK
 segundo-deployment-6b664b7fb8-7rs9b   1/1     Running   0          13m   NL
+```
+
+### Replicaset
+
+#### Criando o primeiro replicaset no Kubernetes
+
+```yml
+apiVersion: extensions/v1beta1
+kind: ReplicaSet
+metadata:
+  name: replica-set-primeiro
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        system: Giropops
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.7.9
+        ports:
+        - containerPort: 80
 ```
 
