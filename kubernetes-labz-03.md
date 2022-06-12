@@ -19,7 +19,7 @@
     - [Criando o primeiro replicaset no Kubernetes](#criando-o-primeiro-replicaset-no-kubernetes)
 
 ### Deployments
-Toda vez que eu crio um deployment sabemos que ele vai criar um replicaset, o deployment que gerencia o replicaset.
+Toda vez que eu crio um deployment, sabemos que ele vai criar um replicaset, o deployment que gerencia o replicaset.
 
 #### Vamos criar o manifesto de deployment
 
@@ -84,8 +84,7 @@ metadata:
   name: primeiro-deployment
   namespace: default
 spec:
-  replicas: 1
-  selector:
+  
     matchLabels:
       run: nginx
   template:
