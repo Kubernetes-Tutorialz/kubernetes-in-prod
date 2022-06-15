@@ -10,8 +10,6 @@
     - [Criando um service usando `YML`](#criando-um-service-usando-yml)
 
 
-
-
 ## Services
 
 ### Verificando o cluster antes de comecar
