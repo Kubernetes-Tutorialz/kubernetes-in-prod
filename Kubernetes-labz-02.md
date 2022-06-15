@@ -45,15 +45,6 @@ d) Analisando se temos *replica-set*:
 No resources found in default namespace.
 ```
 
-
-
-
-
-
-
-
-
-
 #### Analisando se o cluster tem `ClusterIP`
 
 2.  Uma coisa importante que precisamos saber, quando eu criei meu service veja ele veio com o *type* setado como *ClusterIP*.
@@ -65,7 +56,7 @@ kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP   7d13h
 nginx        ClusterIP   10.109.244.99   <none>        80/TCP    22m
 ```
 
-- ou seja, nao preciso passar a porta *80* para ele porque ele sabe que tem acesso dentro do cluster.
+- ou seja, nao preciso passar a porta *80* para ele porque ele sabe que tem acesso dentro do cluster (sempre sera ClusterIP)
 
 Se eu der um comando *curl*:
 
