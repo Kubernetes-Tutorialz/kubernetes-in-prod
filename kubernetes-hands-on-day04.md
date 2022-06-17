@@ -8,8 +8,8 @@
   - [Tipos de volumes](#tipos-de-volumes)
   - [Criando nosso volume](#criando-nosso-volume)
 
-
 ## Volumes no Kubernetes
+
 Hoje vamos aprender mais sobre volumes no Kubernetes, existem dois tipos de volumes:
 
 ### Tipos de volumes
@@ -20,6 +20,8 @@ Hoje vamos aprender mais sobre volumes no Kubernetes, existem dois tipos de volu
 - Persistent Volume ()
 
 ### Criando nosso volume
+
+`# kubectl create -f pod_emptydir.yml`
 
 ```yml
 apiVersion: v1
@@ -41,3 +43,4 @@ spec:
   - name: giropops-dir
     emptyDir: {}
 ```
+
