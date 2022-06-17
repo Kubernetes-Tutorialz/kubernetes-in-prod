@@ -14,6 +14,7 @@
       - [Descrevendo nosso POD](#descrevendo-nosso-pod)
       - [Onde fica no disco esse volume criado?](#onde-fica-no-disco-esse-volume-criado)
     - [Volume do tipo PV `Persistent Volume`](#volume-do-tipo-pv-persistent-volume)
+  - [Mais sobre Persistent Volume](#mais-sobre-persistent-volume)
 
 ## Volumes no Kubernetes
 
@@ -162,3 +163,9 @@ Acessando o volume dentro desse node:
 ```
 
 ### Volume do tipo PV `Persistent Volume`
+
+Aqui dentro do Kubernetes, temos dois tipos de persistente volumes (PV e PVC), sendo PV == Persistent Volume e PVC == Persistent Volume Claim.
+
+## Mais sobre Persistent Volume
+
+Quando temos esse tipo de volume estamos com a ideia de criar um disco, um compartilhamento,
