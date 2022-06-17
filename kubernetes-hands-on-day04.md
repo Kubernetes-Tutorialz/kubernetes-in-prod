@@ -7,6 +7,9 @@
 - [Volumes no Kubernetes](#volumes-no-kubernetes)
   - [Tipos de volumes](#tipos-de-volumes)
   - [Criando nosso volume](#criando-nosso-volume)
+  - [Analisando nosso POD](#analisando-nosso-pod)
+  - [Acessando o POD criado](#acessando-o-pod-criado)
+  - [Visualizando nosso vvolume](#visualizando-nosso-vvolume)
 
 ## Volumes no Kubernetes
 
@@ -43,4 +46,26 @@ spec:
   - name: giropops-dir
     emptyDir: {}
 ```
+
+### Analisando nosso POD
+
+```bash
+# kubectl get pods
+NAME      READY   STATUS    RESTARTS   AGE  
+busybox   1/1     Running   0          8m55s
+nginx     1/1     Running   0          4h9m 
+```
+
+### Acessando o POD criado
+
+`# kubectl exec -ti busybox -- sh`
+
+### Visualizando nosso vvolume
+
+```bash
+# kubectl exec -ti busybox -- sh
+/ # ls
+bin       dev       etc       giropops  home      proc      root      sys       tmp       usr       var
+```
+
 
