@@ -12,6 +12,7 @@
     - [Acessando o POD criado](#acessando-o-pod-criado)
     - [Visualizando nosso volume](#visualizando-nosso-volume)
     - [Descrevendo nosso POD](#descrevendo-nosso-pod)
+    - [Onde fica no disco esse volume criado?](#onde-fica-no-disco-esse-volume-criado)
   - [Volume do tipo `Persistent Volume`](#volume-do-tipo-persistent-volume)
 
 ## Volumes no Kubernetes
@@ -137,4 +138,28 @@ Events:
   Normal  Scheduled  15m   default-scheduler  Successfully assigned default/busybox to kubernetes-node03
   ```
 
+#### Onde fica no disco esse volume criado?
+
+```bash
+# kubectl get pods busybox -o wide
+NAME      READY   STATUS    RESTARTS   AGE   IP          NODE                NOMINATED NODE   READINESS GATES
+busybox   1/1     Running   0          22m   10.36.0.1   kubernetes-node03   <none>           <none>
+```
+
+Veja que no node-03 que ele fica dessa forma:
+
+```bash
+# ls
+0f0c9b06-0133-402f-9614-757567910ca1  dc90bea1-4721-464f-9aa9-bc4126492e24  e2e9c2e2-8a90-4b15-9925-a6d501b9e93f
+```
+
+Acessando o volume dentro desse node:
+
+```bash
+# find . -iname "giropops-dir"
+./e2e9c2e2-8a90-4b15-9925-a6d501b9e93f/volumes/kubernetes.io~empty-dir/giropops-dir
+./e2e9c2e2-8a90-4b15-9925-a6d501b9e93f/plugins/kubernetes.io~empty-dir/giropops-dir
+```
+
 ### Volume do tipo `Persistent Volume`
+
