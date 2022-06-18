@@ -168,4 +168,7 @@ Aqui dentro do Kubernetes, temos dois tipos de persistente volumes (PV e PVC), s
 
 ## Mais sobre Persistent Volume
 
-Quando temos esse tipo de volume estamos com a ideia de criar um disco, um compartilhamento,
+Quando temos esse tipo de volume estamos com a ideia de criar um disco, um compartilhamento, um volume para que isso torne um disco, um persistente volume.
+
+- precisa ser atachado ao POD (precisa fazer um PVC para que ele seja atachado no POD).
+
