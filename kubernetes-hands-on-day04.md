@@ -17,6 +17,9 @@
       - [Mais sobre Persistent Volume](#mais-sobre-persistent-volume)
       - [Inciando a criacao de um volume PV](#inciando-a-criacao-de-um-volume-pv)
         - [Instalando os pacotes de NFS](#instalando-os-pacotes-de-nfs)
+        - [Crie o diretorio dentro do `control plane`](#crie-o-diretorio-dentro-do-control-plane)
+        - [Ativacao do NFS](#ativacao-do-nfs)
+        - [Criando arquivo de teste](#criando-arquivo-de-teste)
 
 ## Volumes no Kubernetes
 
@@ -182,5 +185,23 @@ Precisamos fazer a instalacao do pacote NFS no `control plane` antes de qualquer
 
 - O pacote que precisamos instalar e o `nfs-utils` para sistemas baseados em RED HAT.\
 - Para sistemas baseados em Deviab/Ubuntu, usamos o pacote `nfs-kernel-server` e o cliente `nfs-common`
+
+##### Crie o diretorio dentro do `control plane`
+
+`mkdir /opt/dados` e deposi exexute o comando `chmod 1777 /opt/dados/`
+
+##### Ativacao do NFS
+
+Crie o arquivo de nome `export` dentro do `control plane`
+
+`sudo vim /etc/exports` e adicione a seguinte linha `/opt/dados *(rw,sync,no_root_squash,subtree_check)`
+
+Agora depois disso feito, aplique as configuracoes com o comando `sudo exportfs -a` e faca o restart do servico `sudo systemctl restart nfs`
+
+
+##### Criando arquivo de teste
+
+Crie o seguinte arquivo de teste dentro do diretorio `/opt/dados/teste-funciona`
+
 
 
