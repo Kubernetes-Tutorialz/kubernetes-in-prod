@@ -27,6 +27,7 @@
       - [Listando o PVC](#listando-o-pvc)
       - [Criando nosso Deployment para teste](#criando-nosso-deployment-para-teste)
       - [Criando o deployment](#criando-o-deployment)
+      - [Listando o deployment](#listando-o-deployment)
 
 ## Volumes no Kubernetes
 
@@ -346,5 +347,14 @@ spec:
       securityContext: {}
       terminationGracePeriodSeconds: 30
 ```
+
+#### Listando o deployment
+
+```bash
+# kubectl get deployments.apps 
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+nginx   0/1     1            0           6s
+```
+
 
 
