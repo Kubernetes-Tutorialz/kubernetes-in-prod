@@ -20,6 +20,8 @@
         - [Crie o diretorio dentro do `control plane`](#crie-o-diretorio-dentro-do-control-plane)
         - [Ativacao do NFS](#ativacao-do-nfs)
         - [Criando arquivo de teste](#criando-arquivo-de-teste)
+      - [Hora de criar o `YML` do nosso PV](#hora-de-criar-o-yml-do-nosso-pv)
+        - [](#)
 
 ## Volumes no Kubernetes
 
@@ -198,10 +200,32 @@ Crie o arquivo de nome `export` dentro do `control plane`
 
 Agora depois disso feito, aplique as configuracoes com o comando `sudo exportfs -a` e faca o restart do servico `sudo systemctl restart nfs`
 
-
 ##### Criando arquivo de teste
 
 Crie o seguinte arquivo de teste dentro do diretorio `/opt/dados/teste-funciona`
 
+####  Hora de criar o `YML` do nosso PV
 
+Para criar basta seguir com o comando abaixo:
 
+`kubectl create -f primeiro_pv.yml`
+
+```yml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: primeiro-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+  - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nfs
+  nfs:
+    path: /opt/dados
+    server: 192.168.1.129 
+    readOnly: false
+```
+
+##### 
