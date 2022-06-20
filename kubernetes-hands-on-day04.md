@@ -14,8 +14,8 @@
       - [Descrevendo nosso POD](#descrevendo-nosso-pod)
       - [Onde fica no disco esse volume criado?](#onde-fica-no-disco-esse-volume-criado)
     - [Volume do tipo PV `Persistent Volume`](#volume-do-tipo-pv-persistent-volume)
-  - [Mais sobre Persistent Volume](#mais-sobre-persistent-volume)
-    - [Inciando a criacao de um volume PV](#inciando-a-criacao-de-um-volume-pv)
+      - [Mais sobre Persistent Volume](#mais-sobre-persistent-volume)
+      - [Inciando a criacao de um volume PV](#inciando-a-criacao-de-um-volume-pv)
 
 ## Volumes no Kubernetes
 
@@ -167,11 +167,15 @@ Acessando o volume dentro desse node:
 
 Aqui dentro do Kubernetes, temos dois tipos de persistente volumes (PV e PVC), sendo PV == Persistent Volume e PVC == Persistent Volume Claim.
 
-## Mais sobre Persistent Volume
+#### Mais sobre Persistent Volume
 
 Quando temos esse tipo de volume estamos com a ideia de criar um disco, um compartilhamento, um volume para que isso torne um disco, um persistente volume.
 
 - precisa ser atachado ao POD (precisa fazer um PVC para que ele seja atachado no POD).
 
-### Inciando a criacao de um volume PV
+#### Inciando a criacao de um volume PV
+
+Precisamos fazer a instalacao do NFS no control plane para gerenciar.
+
+
 
