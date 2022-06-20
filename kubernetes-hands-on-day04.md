@@ -16,6 +16,7 @@
     - [Volume do tipo PV `Persistent Volume`](#volume-do-tipo-pv-persistent-volume)
       - [Mais sobre Persistent Volume](#mais-sobre-persistent-volume)
       - [Inciando a criacao de um volume PV](#inciando-a-criacao-de-um-volume-pv)
+        - [Instalando os pacotes de NFS](#instalando-os-pacotes-de-nfs)
 
 ## Volumes no Kubernetes
 
@@ -175,7 +176,11 @@ Quando temos esse tipo de volume estamos com a ideia de criar um disco, um compa
 
 #### Inciando a criacao de um volume PV
 
-Precisamos fazer a instalacao do NFS no control plane para gerenciar.
+##### Instalando os pacotes de NFS
 
+Precisamos fazer a instalacao do pacote NFS no `control plane` antes de qualquer coisa.
+
+- O pacote que precisamos instalar e o `nfs-utils` para sistemas baseados em RED HAT.\
+- Para sistemas baseados em Deviab/Ubuntu, usamos o pacote `nfs-kernel-server` e o cliente `nfs-common`
 
 
