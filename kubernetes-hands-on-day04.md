@@ -21,7 +21,8 @@
         - [Ativacao do NFS](#ativacao-do-nfs)
         - [Criando arquivo de teste](#criando-arquivo-de-teste)
       - [Hora de criar o `YML` do nosso PV](#hora-de-criar-o-yml-do-nosso-pv)
-        - [](#)
+      - [Listando o PV que foi criado](#listando-o-pv-que-foi-criado)
+      - [Descrevendo o PV](#descrevendo-o-pv)
 
 ## Volumes no Kubernetes
 
@@ -228,4 +229,39 @@ spec:
     readOnly: false
 ```
 
-##### 
+#### Listando o PV que foi criado
+
+```bash
+# kubectl get pv
+NAME          CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS   REASON   AGE
+primeiro-pv   1Gi        RWX            Retain           Available           nfs                     23s
+```
+
+#### Descrevendo o PV
+
+`# kubectl describe pv primeiro-pv`
+
+```bash
+Name:            primeiro-pv
+Labels:          <none>
+Annotations:     <none>
+Finalizers:      [kubernetes.io/pv-protection]
+StorageClass:    nfs
+Status:          Available
+Claim:
+Reclaim Policy:  Retain
+Access Modes:    RWX
+VolumeMode:      Filesystem
+Capacity:        1Gi
+Node Affinity:   <none>
+Message:
+Source:
+    Type:      NFS (an NFS mount that lasts the lifetime of a pod)
+    Server:    192.168.0.134
+    Path:      /opt/dados
+    ReadOnly:  false
+Events:        <none>
+```
+
+
+
