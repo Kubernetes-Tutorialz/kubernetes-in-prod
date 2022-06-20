@@ -23,6 +23,10 @@
       - [Hora de criar o `YML` do nosso PV](#hora-de-criar-o-yml-do-nosso-pv)
       - [Listando o PV que foi criado](#listando-o-pv-que-foi-criado)
       - [Descrevendo o PV](#descrevendo-o-pv)
+      - [Hora de criar o `YML` do nosso PVC](#hora-de-criar-o-yml-do-nosso-pvc)
+      - [Listando o PVC](#listando-o-pvc)
+      - [Criando nosso Deployment para teste](#criando-nosso-deployment-para-teste)
+      - [Criando o deployment](#criando-o-deployment)
 
 ## Volumes no Kubernetes
 
@@ -263,5 +267,84 @@ Source:
 Events:        <none>
 ```
 
+####  Hora de criar o `YML` do nosso PVC
+
+`# kubectl create -f primeiro_pvc.yml`
+
+```yml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: primeiro-pvc
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 800Mi
+  storageClassName: nfs
+```
+
+#### Listando o PVC
+
+```bash
+# kubectl get pvc
+NAME           STATUS   VOLUME        CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+primeiro-pvc   Bound    primeiro-pv   1Gi        RWX            nfs            8s
+```
+
+#### Criando nosso Deployment para teste
+
+Para que possamos testar esses volumes que foram criados, precisamos por dentro de um POD.
+
+#### Criando o deployment
+
+`# kubectl create -f nfs-pv.yml`
+
+```yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: nginx
+  name: nginx
+  namespace: default
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      run: nginx
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        run: nginx
+    spec:
+      containers:
+      - image: nginx
+        imagePullPolicy: Always
+        name: nginx
+        volumeMounts:
+        - name: nfs-pv
+          mountPath: /giropops
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      volumes:
+      - name: nfs-pv
+        persistentVolumeClaim:
+          claimName: primeiro-pvc
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+```
 
 
