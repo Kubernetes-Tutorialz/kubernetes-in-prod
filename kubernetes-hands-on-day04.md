@@ -28,6 +28,10 @@
       - [Criando nosso Deployment para teste](#criando-nosso-deployment-para-teste)
       - [Criando o deployment](#criando-o-deployment)
       - [Listando o deployment](#listando-o-deployment)
+      - [Descrevendo o deployment criado](#descrevendo-o-deployment-criado)
+      - [Listando o POD desse deployment criado](#listando-o-pod-desse-deployment-criado)
+      - [Descrevendo nosso POD](#descrevendo-nosso-pod-1)
+      - [Usando o `kubectl exec` para se conectar dentro desse POD](#usando-o-kubectl-exec-para-se-conectar-dentro-desse-pod)
 
 ## Volumes no Kubernetes
 
@@ -354,6 +358,127 @@ spec:
 # kubectl get deployments.apps 
 NAME    READY   UP-TO-DATE   AVAILABLE   AGE
 nginx   0/1     1            0           6s
+```
+
+#### Descrevendo o deployment criado
+
+`# kubectl describe deployments.apps nginx`
+
+```bash
+Name:                   nginx
+Namespace:              default
+CreationTimestamp:      Sun, 19 Jun 2022 19:36:34 -0300
+Labels:                 run=nginx
+Annotations:            deployment.kubernetes.io/revision: 1
+Selector:               run=nginx
+Replicas:               1 desired | 1 updated | 1 total | 1 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  1 max unavailable, 1 max surge
+Pod Template:
+  Labels:  run=nginx
+  Containers:
+   nginx:
+    Image:        nginx
+    Port:         <none>
+    Host Port:    <none>
+    Environment:  <none>
+    Mounts:
+      /giropops from nfs-pv (rw)
+  Volumes:
+   nfs-pv:
+    Type:       PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+    ClaimName:  primeiro-pvc
+    ReadOnly:   false
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   nginx-6f559865fb (1/1 replicas created)
+Events:          <none>
+```
+
+#### Listando o POD desse deployment criado
+
+```bash
+# kubectl get pods
+NAME                     READY   STATUS    RESTARTS       AGE
+busybox                  1/1     Running   29 (39m ago)   3d5h
+nginx                    1/1     Running   1 (11h ago)    3d9h
+nginx-6f559865fb-s7pnr   1/1     Running   0              3h18m
+webserver                1/1     Running   0              7h59m
+```
+
+#### Descrevendo nosso POD
+
+`# kubectl describe pods  nginx-6f559865fb-s7pnr`
+
+```bash
+Name:         nginx-6f559865fb-s7pnr
+Namespace:    default
+Priority:     0
+Node:         kubernetes-node01/192.168.0.235
+Start Time:   Sun, 19 Jun 2022 19:38:16 -0300
+Labels:       pod-template-hash=6f559865fb
+              run=nginx
+Annotations:  <none>
+Status:       Running
+IP:           10.44.0.2
+IPs:
+  IP:           10.44.0.2
+Controlled By:  ReplicaSet/nginx-6f559865fb
+Containers:
+  nginx:
+    Container ID:   containerd://7fe2731c95e92cdf0198c7cef18c961ed113e0f754b4d3a7943029662e74cc1d
+    Image:          nginx
+    Image ID:       docker.io/library/nginx@sha256:2bcabc23b45489fb0885d69a06ba1d648aeda973fae7bb981bafbb884165e514
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Sun, 19 Jun 2022 19:38:49 -0300
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /giropops from nfs-pv (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-jzlfg (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  nfs-pv:
+    Type:       PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+    ClaimName:  primeiro-pvc
+    ReadOnly:   false
+  kube-api-access-jzlfg:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:                      <none>
+```
+
+#### Usando o `kubectl exec` para se conectar dentro desse POD
+
+```bash
+# kubectl exec -ti nginx-6f559865fb-s7pnr -- sh
+# 
+# 
+#
+#
+#
+#
+# pwd
 ```
 
 
