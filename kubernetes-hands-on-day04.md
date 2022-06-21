@@ -45,6 +45,9 @@
     - [Descrevendo a secret](#descrevendo-a-secret)
     - [Analisando o `YML` file dessa secret](#analisando-o-yml-file-dessa-secret)
     - [Usando o `decode` para ver os dados](#usando-o-decode-para-ver-os-dados)
+    - [Criando um POD para demonstrar](#criando-um-pod-para-demonstrar)
+    - [Listando o POD](#listando-o-pod)
+    - [Descrevendo o POD](#descrevendo-o-pod)
 
 ## Volumes no Kubernetes
 
@@ -779,6 +782,103 @@ giropops strigus girus[root@kubernetes-cluster day-04]#
 
 Veja que ele mostra os dados sensiveis da minha secret. Demais em!?
 
+### Criando um POD para demonstrar
 
+`# kubectl create -f pod-secret.yml`
 
+```yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-secret
+  namespace: default
+spec:
+  containers:
+  - image: busybox
+    name: busy
+    command:
+      - sleep
+      - "3600"
+    volumeMounts:
+    - mountPath: /tmp/giropops
+      name: my-volume-secret
+  volumes:
+  - name: my-volume-secret
+    secret:
+      secretName: my-secret
+```
 
+### Listando o POD
+
+```bash
+# kubectl get pods 
+NAME          READY   STATUS    RESTARTS       AGE
+busybox       1/1     Running   33 (12m ago)   3d9h
+nginx         1/1     Running   1 (15h ago)    3d13h
+test-secret   1/1     Running   0              6s
+webserver     1/1     Running   0              11h
+```
+
+### Descrevendo o POD
+
+```yml
+# kubectl describe pods test-secret 
+Name:         test-secret
+Namespace:    default
+Priority:     0
+Node:         kubernetes-node01/192.168.0.235
+Start Time:   Mon, 20 Jun 2022 02:30:36 -0300
+Labels:       <none>
+Annotations:  <none>
+Status:       Running
+IP:           10.44.0.2
+IPs:
+  IP:  10.44.0.2
+Containers:
+  busy:
+    Container ID:  containerd://1312bea7fdab0eabadad22898eb6d2f7fdc7e8115127dd9aa9eb90f04e9dcc5f
+    Image:         busybox
+    Image ID:      docker.io/library/busybox@sha256:3614ca5eacf0a3a1bcc361c939202a974b4902b9334ff36eb29ffe9011aaad83
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      sleep
+      3600
+    State:          Running
+      Started:      Mon, 20 Jun 2022 02:30:39 -0300
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /tmp/giropops from my-volume-secret (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-cwhkn (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  my-volume-secret:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  my-secret
+    Optional:    false
+  kube-api-access-cwhkn:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age        From               Message
+  ----    ------     ----       ----               -------
+  Normal  Scheduled  50s        default-scheduler  Successfully assigned default/test-secret to kubernetes-node01
+  Normal  Pulling    <invalid>  kubelet            Pulling image "busybox"
+  Normal  Pulled     <invalid>  kubelet            Successfully pulled image "busybox" in 1.562530804s
+  Normal  Created    <invalid>  kubelet            Created container busy
+  Normal  Started    <invalid>  kubelet            Started container busy
+  ```
