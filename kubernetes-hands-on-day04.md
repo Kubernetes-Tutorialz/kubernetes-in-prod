@@ -474,12 +474,45 @@ Events:                      <none>
 # kubectl exec -ti nginx-6f559865fb-s7pnr -- sh
 # 
 # 
-#
-#
-#
-#
 # pwd
 ```
+
+Analisando com mais detalhes nosso POD
+
+```bash
+@nginx-6f559865fb-s7pnr:/# ls
+bin  boot  dev  docker-entrypoint.d  docker-entrypoint.sh  etc  giropops  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+root@nginx-6f559865fb-s7pnr:/#
+root@nginx-6f559865fb-s7pnr:/#
+```
+
+Vou acessar o dietorio giropops e criar alguns arquivos la dentro:
+
+```bash
+@nginx-6f559865fb-s7pnr:/giropops# ls
+ama  nica  teste  testu
+```
+
+Agora eu posso sair do POD que eu tenho acesso aos arquivos criados:
+
+```bash
+@kubernetes-cluster dados]# pwd     
+/opt/dados
+[root@kubernetes-cluster dados]# ls
+ama  nica  teste  testu
+```
+
+O POD esta monstado nesse node:
+
+```bash
+# kubectl get pods nginx-6f559865fb-s7pnr  -o wide
+NAME                     READY   STATUS    RESTARTS   AGE     IP          NODE                NOMINATED NODE   READINESS GATES
+nginx-6f559865fb-s7pnr   1/1     Running   0          3h25m   10.42.0.5   kubernetes-node01   <none>           <none>
+```
+
+
+
+
 
 
 
