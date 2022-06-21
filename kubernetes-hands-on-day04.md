@@ -35,6 +35,7 @@
       - [Deletando nosso deployment](#deletando-nosso-deployment)
   - [CronJobs no Kubernetes](#cronjobs-no-kubernetes)
     - [Criando o Cronjobs](#criando-o-cronjobs)
+      - [Listando o Cronjob](#listando-o-cronjob)
 
 ## Volumes no Kubernetes
 
@@ -570,6 +571,16 @@ spec:
             - date; echo Bem Vindo ao Descomplicando Kubernetes - LinuxTips VAIIII ;sleep 30
           restartPolicy: OnFailure
 ```
+
+#### Listando o Cronjob
+
+```bash
+# kubectl get cronjobs.batch 
+NAME            SCHEDULE      SUSPEND   ACTIVE   LAST SCHEDULE   AGE 
+giropops-cron   */1 * * * *   False     1        5s              143m
+```
+
+
 
 
 
