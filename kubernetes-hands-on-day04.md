@@ -38,6 +38,11 @@
       - [Listando o Cronjob](#listando-o-cronjob)
       - [Descrevendo esse Cronjob](#descrevendo-esse-cronjob)
       - [Testando o Cronjob](#testando-o-cronjob)
+      - [Deletando o Cronjob](#deletando-o-cronjob)
+  - [Secrets](#secrets)
+    - [Criando uma `secret` no Kubernetes](#criando-uma-secret-no-kubernetes)
+    - [Listando essa secret](#listando-essa-secret)
+    - [Descrevendo a secret](#descrevendo-a-secret)
 
 ## Volumes no Kubernetes
 
@@ -696,6 +701,53 @@ giropops-cron-27595017-6v5qk   0/1     Terminating         0              3m37s
 giropops-cron-27595017-6v5qk   0/1     Terminating         0              3m37s
 ```
 
+#### Deletando o Cronjob
+
+```bash
+# kubectl delete cronjobs.batch giropops-cron 
+cronjob.batch "giropops-cron" deleted
+```
+
+## Secrets
+
+Passando informacoes sensiveis para o meu sistema dentro do Kubernetes, neste caso eu uso `secrets` do Kubernetes.
+
+Vamos criar uma `secret` bem basica para que possamos entender o cenario dentro do Kubernetes.
+
+`# echo -n "giropops strigus girus" > secret.txt`
+
+### Criando uma `secret` no Kubernetes
+
+`# kubectl create secret generic my-secret --from-file secret.txt `
+
+```bash
+# kubectl create secret generic my-secret --from-file secret.txt 
+secret/my-secret created
+```
+
+### Listando essa secret
+
+```bash
+# kubectl get secrets 
+NAME        TYPE     DATA   AGE
+my-secret   Opaque   1      66s
+```
+
+### Descrevendo a secret
+
+```bash
+# kubectl describe secrets my-secret 
+Name:         my-secret
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Type:  Opaque
+
+Data
+====
+secret.txt:  22 bytes
+```
 
 
 
