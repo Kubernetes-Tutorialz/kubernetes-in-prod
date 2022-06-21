@@ -36,6 +36,8 @@
   - [CronJobs no Kubernetes](#cronjobs-no-kubernetes)
     - [Criando o Cronjobs](#criando-o-cronjobs)
       - [Listando o Cronjob](#listando-o-cronjob)
+      - [Descrevendo esse Cronjob](#descrevendo-esse-cronjob)
+      - [Testando o Cronjob](#testando-o-cronjob)
 
 ## Volumes no Kubernetes
 
@@ -580,8 +582,119 @@ NAME            SCHEDULE      SUSPEND   ACTIVE   LAST SCHEDULE   AGE
 giropops-cron   */1 * * * *   False     1        5s              143m
 ```
 
+#### Descrevendo esse Cronjob
+
+```bash
+# kubectl describe cronjobs.batch giropops-cron 
+Name:                          giropops-cron
+Namespace:                     default      
+Labels:                        <none>       
+Annotations:                   <none>       
+Schedule:                      */1 * * * *  
+Concurrency Policy:            Allow        
+Suspend:                       False        
+Successful Job History Limit:  3
+Failed Job History Limit:      1
+Starting Deadline Seconds:     <unset>
+Selector:                      <unset>
+Parallelism:                   <unset>
+Completions:                   <unset>
+Pod Template:
+  Labels:  <none>
+  Containers:
+   giropops-cron:
+    Image:      busybox
+    Port:       <none>
+    Host Port:  <none>
+    Args:
+      /bin/sh
+      -c
+      date; echo Bem Vindo ao Descomplicando Kubernetes - LinuxTips VAIIII ;sleep 30
+    Environment:     <none>
+    Mounts:          <none>
+  Volumes:           <none>
+Last Schedule Time:  Mon, 20 Jun 2022 01:50:00 -0300
+Active Jobs:         giropops-cron-27595010
+Events:
+  Type    Reason            Age                   From                Message
+  ----    ------            ----                  ----                -------
+  Normal  SuccessfulCreate  26m (x117 over 142m)  cronjob-controller  (combined from similar events): Created job giropops-cron-27594984
+  Normal  SawCompletedJob   59s (x155 over 141m)  cronjob-controller  (combined from similar events): Saw completed job: giropops-cron-27595009, status: Complete
+  ```
+
+  Posso tambem executar o comando abaixo que mostra os jobs que estao sendo executados:
+
+  ```bash
+  # kubectl get jobs
+NAME                     COMPLETIONS   DURATION   AGE
+giropops-cron-27595009   1/1           37s        2m49s
+giropops-cron-27595010   1/1           36s        109s
+giropops-cron-27595011   1/1           37s        49s
+```
+
+#### Testando o Cronjob
+
+Veja a saida do comando abaixo, ele mostra as execucoes de cada container dentro do POD:
+
+```bash
+# kubectl get jobs --watch
+NAME                     COMPLETIONS   DURATION   AGE
+giropops-cron-27595010   1/1           36s        2m48s
+giropops-cron-27595011   1/1           37s        108s
+giropops-cron-27595012   1/1           37s        48s
 
 
+giropops-cron-27595013   0/1                      0s
+giropops-cron-27595013   0/1           0s         0s
+giropops-cron-27595013   0/1           4s         4s
+giropops-cron-27595013   0/1           35s        35s
+giropops-cron-27595013   1/1           37s        37s
+giropops-cron-27595010   1/1           36s        3m37s
+```
+
+Veja que listando os PODS, ele mostra como `completed`:
+
+```bash
+# kubectl get pods
+NAME                           READY   STATUS      RESTARTS       AGE
+busybox                        1/1     Running     32 (41m ago)   3d8h
+giropops-cron-27595014-4ftq4   0/1     Completed   0              3m24s
+giropops-cron-27595015-2v7c6   0/1     Completed   0              2m24s
+giropops-cron-27595016-724xj   0/1     Completed   0              84s
+giropops-cron-27595017-6v5qk   1/1     Running     0              24s
+nginx                          1/1     Running     1 (14h ago)    3d12h
+webserver                      1/1     Running     0              11h
+```
+
+Olha ele pegando os logs:
+
+```bash
+# kubectl logs giropops-cron-27595018-mqctg
+Mon Jun 20 05:00:03 UTC 2022
+Bem Vindo ao Descomplicando Kubernetes - LinuxTips VAIIII
+```
+
+O ciclo de vida do POD:
+
+```bash
+]# kubectl get pods --watch
+NAME                           READY   STATUS      RESTARTS       AGE
+busybox                        1/1     Running     32 (43m ago)   3d8h
+giropops-cron-27595017-6v5qk   0/1     Completed   0              2m55s
+giropops-cron-27595018-mqctg   0/1     Completed   0              115s
+giropops-cron-27595019-d4ndm   0/1     Completed   0              55s
+nginx                          1/1     Running     1 (14h ago)    3d12h
+webserver                      1/1     Running     0              11h
+
+giropops-cron-27595020-jk98m   0/1     Pending     0              0s
+giropops-cron-27595020-jk98m   0/1     Pending     0              0s
+giropops-cron-27595020-jk98m   0/1     ContainerCreating   0              0s
+giropops-cron-27595020-jk98m   1/1     Running             0              3s
+giropops-cron-27595020-jk98m   0/1     Completed           0              33s
+giropops-cron-27595020-jk98m   0/1     Completed           0              35s
+giropops-cron-27595017-6v5qk   0/1     Terminating         0              3m37s
+giropops-cron-27595017-6v5qk   0/1     Terminating         0              3m37s
+```
 
 
 
