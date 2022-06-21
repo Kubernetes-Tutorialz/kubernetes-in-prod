@@ -43,6 +43,7 @@
     - [Criando uma `secret` no Kubernetes](#criando-uma-secret-no-kubernetes)
     - [Listando essa secret](#listando-essa-secret)
     - [Descrevendo a secret](#descrevendo-a-secret)
+    - [Analisando o `YML` file dessa secret](#analisando-o-yml-file-dessa-secret)
 
 ## Volumes no Kubernetes
 
@@ -748,6 +749,24 @@ Data
 ====
 secret.txt:  22 bytes
 ```
+
+### Analisando o `YML` file dessa secret
+
+```bash
+# kubectl get secrets my-secret -o yaml
+apiVersion: v1
+data:
+  secret.txt: Z2lyb3BvcHMgc3RyaWd1cyBnaXJ1cw==
+kind: Secret
+metadata:
+  creationTimestamp: "2022-06-20T05:16:34Z"
+  name: my-secret
+  namespace: default
+  resourceVersion: "205344"
+  uid: 2f29641e-33c3-4f16-82ec-e56be6b6670b
+type: Opaque
+```
+
 
 
 
