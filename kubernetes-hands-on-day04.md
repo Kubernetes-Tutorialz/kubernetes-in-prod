@@ -33,6 +33,8 @@
       - [Descrevendo nosso POD](#descrevendo-nosso-pod-1)
       - [Usando o `kubectl exec` para se conectar dentro desse POD](#usando-o-kubectl-exec-para-se-conectar-dentro-desse-pod)
       - [Deletando nosso deployment](#deletando-nosso-deployment)
+  - [CronJobs no Kubernetes](#cronjobs-no-kubernetes)
+    - [Criando o Cronjobs](#criando-o-cronjobs)
 
 ## Volumes no Kubernetes
 
@@ -536,8 +538,40 @@ No resources found in default namespace.
 [root@kubernetes-cluster dados]# ls
 ama  nica  teste  testu
 ```
-
 Veja que os dados que foram criados estao da mesma forma, ou seja, os volumes funcionaram usando a forma de PV.
+
+## CronJobs no Kubernetes
+
+Vamos agendar algo dentro do Kubernetes, por exemplo agendar em meses, dias, execute detrminado comando, script. Pensa que o `cronjobs` no kubernetes e a mesma coisa do que existe dentro do LINUX, mas e uma forma clusterizada.
+
+Posso criar uma rotina dentro do Kubernetes, seja um `POD` ou um `deployment` e ele se encarrega de executar isso dentro do horario que eu deixei agendado e depois morre, nao preciso de uma instancia rodando 100% do tempo la, essa que e a sacada dos `cronjobs` dentro do Kubernetes.
+
+### Criando o Cronjobs
+
+`# kubectl create -f primeiro_cronjobs.yml`
+
+```yml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: giropops-cron
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: giropops-cron
+            image: busybox
+            args:
+            - /bin/sh
+            - -c
+            - date; echo Bem Vindo ao Descomplicando Kubernetes - LinuxTips VAIIII ;sleep 30
+          restartPolicy: OnFailure
+```
+
+
 
 
 
