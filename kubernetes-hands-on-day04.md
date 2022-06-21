@@ -39,7 +39,7 @@
       - [Descrevendo esse Cronjob](#descrevendo-esse-cronjob)
       - [Testando o Cronjob](#testando-o-cronjob)
       - [Deletando o Cronjob](#deletando-o-cronjob)
-  - [Secrets](#secrets)
+  - [Secrets no kubernetes](#secrets-no-kubernetes)
     - [Criando uma `secret` no Kubernetes](#criando-uma-secret-no-kubernetes)
     - [Listando essa secret](#listando-essa-secret)
     - [Descrevendo a secret](#descrevendo-a-secret)
@@ -713,7 +713,7 @@ giropops-cron-27595017-6v5qk   0/1     Terminating         0              3m37s
 cronjob.batch "giropops-cron" deleted
 ```
 
-## Secrets
+## Secrets no kubernetes
 
 Passando informacoes sensiveis para o meu sistema dentro do Kubernetes, neste caso eu uso `secrets` do Kubernetes.
 
