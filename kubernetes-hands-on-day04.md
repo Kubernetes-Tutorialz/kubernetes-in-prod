@@ -32,6 +32,7 @@
       - [Listando o POD desse deployment criado](#listando-o-pod-desse-deployment-criado)
       - [Descrevendo nosso POD](#descrevendo-nosso-pod-1)
       - [Usando o `kubectl exec` para se conectar dentro desse POD](#usando-o-kubectl-exec-para-se-conectar-dentro-desse-pod)
+      - [Deletando nosso deployment](#deletando-nosso-deployment)
 
 ## Volumes no Kubernetes
 
@@ -470,8 +471,18 @@ Events:                      <none>
 
 #### Usando o `kubectl exec` para se conectar dentro desse POD
 
+`# kubectl exec -ti nginx-6f559865fb-s7pnr -- sh`
+
+Posso usar mais formas de se criar arquivos:
+
+`kubectl exec -ti nginx-b4bd77674-gwc9k -- touch /giropops/STRIGUS`
+
+Bem como essa tambem:
+
+`kubectl exec -ti nginx-b4bd77674-gwc9k -- ls -la  /giropops/`
+
 ```bash
-# kubectl exec -ti nginx-6f559865fb-s7pnr -- sh
+#
 # 
 # 
 # pwd
@@ -510,8 +521,23 @@ NAME                     READY   STATUS    RESTARTS   AGE     IP          NODE  
 nginx-6f559865fb-s7pnr   1/1     Running   0          3h25m   10.42.0.5   kubernetes-node01   <none>           <none>
 ```
 
+#### Deletando nosso deployment
 
+Podemos deletar esse PV para testar se realmente esta funcionando:
 
+```bash
+# kubectl delete -f nfs-pv.yml 
+deployment.apps "nginx" deleted
+
+[root@kubernetes-cluster day-04]# kubectl get deployments.apps 
+No resources found in default namespace.
+
+[root@kubernetes-cluster day-04]# cd /opt/dados/
+[root@kubernetes-cluster dados]# ls
+ama  nica  teste  testu
+```
+
+Veja que os dados que foram criados estao da mesma forma, ou seja, os volumes funcionaram usando a forma de PV.
 
 
 
