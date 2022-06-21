@@ -44,6 +44,7 @@
     - [Listando essa secret](#listando-essa-secret)
     - [Descrevendo a secret](#descrevendo-a-secret)
     - [Analisando o `YML` file dessa secret](#analisando-o-yml-file-dessa-secret)
+    - [Usando o `decode` para ver os dados](#usando-o-decode-para-ver-os-dados)
 
 ## Volumes no Kubernetes
 
@@ -767,7 +768,16 @@ metadata:
 type: Opaque
 ```
 
-###
+### Usando o `decode` para ver os dados
+
+Podemos usar o comando abaixo para analisar esses detalhes da secret.
+
+```bash
+# echo "Z2lyb3BvcHMgc3RyaWd1cyBnaXJ1cw==" | base64 --decode
+giropops strigus girus[root@kubernetes-cluster day-04]#
+```
+
+Veja que ele mostra os dados sensiveis da minha secret. Demais em!?
 
 
 
