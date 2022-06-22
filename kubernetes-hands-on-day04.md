@@ -56,6 +56,7 @@
       - [Visualizando o `YML` dessa secret](#visualizando-o-yml-dessa-secret)
       - [Criando um POD para a secret com variaveis](#criando-um-pod-para-a-secret-com-variaveis)
   - [ConfigMaps no Kubernetes](#configmaps-no-kubernetes)
+    - [Criando o POD de teste](#criando-o-pod-de-teste)
 
 ## Volumes no Kubernetes
 
@@ -1028,8 +1029,8 @@ KUBERNETES_SERVICE_HOST='10.96.0.1'
 KUBERNETES_SERVICE_PORT='443'
 KUBERNETES_SERVICE_PORT_HTTPS='443'
 LINENO=''
-`MEU_PASSWORD='teste99'`
-`MEU_USERNAME='amaury'`
+MEU_PASSWORD='teste99'
+MEU_USERNAME='amaury'
 OPTIND='1'
 PATH='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
 PPID='0'
@@ -1055,3 +1056,25 @@ O ConfigMaps dentro do kubernetes consiste na mesma ideia dos secrets, diferenca
 `echo verde > vermelho`
 `echo vermelho > morango`
 
+### Criando o POD de teste
+
+```yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox-configmap
+  namespace: default
+spec:
+  containers:
+  - image: busybox
+    name: busy-configmap
+    command:
+      - sleep
+      - "3600"
+    env:
+    - name: frutas
+      valueFrom:
+        configMapKeyRef:
+          name: cores-frutas
+          key: predileta
+```
