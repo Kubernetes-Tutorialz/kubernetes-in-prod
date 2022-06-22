@@ -54,6 +54,7 @@
       - [Listando a secret](#listando-a-secret)
       - [Descrevendo a secret](#descrevendo-a-secret-1)
       - [Visualizando o `YML` dessa secret](#visualizando-o-yml-dessa-secret)
+      - [Criando um POD para a secret com variaveis](#criando-um-pod-para-a-secret-com-variaveis)
 
 ## Volumes no Kubernetes
 
@@ -964,4 +965,77 @@ Veja, agora foi executar um comando `decode` para ver meu usuario:
 amaury[root@kubernetes-cluster ~]#
 ```
 
+#### Criando um POD para a secret com variaveis
 
+`# kubectl create -f pod-secret-env.yml`
+
+```yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: teste-secret-env
+  namespace: default
+spec:
+  containers:
+  - image: busybox
+    name: busy-secret-env
+    command:
+      - sleep
+      - "3600"
+    env:
+    - name: MEU_USERNAME
+      valueFrom:
+        secretKeyRef:
+          name: my-literal-secret
+          key: user
+    - name: MEU_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: my-literal-secret
+          key: password
+```
+
+- Listando esse POD
+
+```bash
+# kubectl get pods
+NAME               READY   STATUS    RESTARTS       AGE
+busybox            1/1     Running   43 (62m ago)   3d20h
+nginx              1/1     Running   1 (26h ago)    4d
+teste-secret-env   1/1     Running   0              5s
+webserver          1/1     Running   0              22h
+```
+
+- Analisando as variaveis dentro do POD
+
+```bash
+# kubectl exec -ti teste-secret-env -- sh
+/ #
+/ #
+/ # set
+HISTFILE='/root/.ash_history'
+HOME='/root'
+HOSTNAME='teste-secret-env'
+IFS='
+'
+KUBERNETES_PORT='tcp://10.96.0.1:443'
+KUBERNETES_PORT_443_TCP='tcp://10.96.0.1:443'
+KUBERNETES_PORT_443_TCP_ADDR='10.96.0.1'
+KUBERNETES_PORT_443_TCP_PORT='443'
+KUBERNETES_PORT_443_TCP_PROTO='tcp'
+KUBERNETES_SERVICE_HOST='10.96.0.1'
+KUBERNETES_SERVICE_PORT='443'
+KUBERNETES_SERVICE_PORT_HTTPS='443'
+LINENO=''
+`MEU_PASSWORD='teste99'`
+`MEU_USERNAME='amaury'`
+OPTIND='1'
+PATH='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+PPID='0'
+PS1='\w \$ '
+PS2='> '
+PS4='+ '
+PWD='/'
+SHLVL='1'
+TERM='xterm'
+```
