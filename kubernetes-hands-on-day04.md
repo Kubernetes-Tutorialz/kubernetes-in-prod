@@ -40,11 +40,11 @@
       - [Testando o Cronjob](#testando-o-cronjob)
       - [Deletando o Cronjob](#deletando-o-cronjob)
   - [Secrets no kubernetes](#secrets-no-kubernetes)
-      - [Criando uma `secret` no Kubernetes](#criando-uma-secret-no-kubernetes)
-      - [Listando essa secret](#listando-essa-secret)
-      - [Descrevendo a secret](#descrevendo-a-secret)
-      - [Analisando o `YML` file dessa secret](#analisando-o-yml-file-dessa-secret)
-      - [Usando o `decode` para ver os dados](#usando-o-decode-para-ver-os-dados)
+    - [Criando uma `secret` no Kubernetes](#criando-uma-secret-no-kubernetes)
+    - [Listando essa secret](#listando-essa-secret)
+    - [Descrevendo a secret](#descrevendo-a-secret)
+    - [Analisando o `YML` file dessa secret](#analisando-o-yml-file-dessa-secret)
+    - [Usando o `decode` para ver os dados](#usando-o-decode-para-ver-os-dados)
     - [Criando um POD para demonstrar](#criando-um-pod-para-demonstrar)
     - [Listando o POD](#listando-o-pod)
     - [Descrevendo o POD](#descrevendo-o-pod)
@@ -728,7 +728,7 @@ Vamos criar uma `secret` bem basica para que possamos entender o cenario dentro 
 
 `# echo -n "giropops strigus girus" > secret.txt`
 
-#### Criando uma `secret` no Kubernetes
+### Criando uma `secret` no Kubernetes
 
 `# kubectl create secret generic my-secret --from-file secret.txt `
 
@@ -737,7 +737,7 @@ Vamos criar uma `secret` bem basica para que possamos entender o cenario dentro 
 secret/my-secret created
 ```
 
-#### Listando essa secret
+### Listando essa secret
 
 ```bash
 # kubectl get secrets 
@@ -745,7 +745,7 @@ NAME        TYPE     DATA   AGE
 my-secret   Opaque   1      66s
 ```
 
-#### Descrevendo a secret
+### Descrevendo a secret
 
 ```bash
 # kubectl describe secrets my-secret 
@@ -761,7 +761,7 @@ Data
 secret.txt:  22 bytes
 ```
 
-#### Analisando o `YML` file dessa secret
+### Analisando o `YML` file dessa secret
 
 ```bash
 # kubectl get secrets my-secret -o yaml
@@ -778,7 +778,7 @@ metadata:
 type: Opaque
 ```
 
-#### Usando o `decode` para ver os dados
+### Usando o `decode` para ver os dados
 
 Podemos usar o comando abaixo para analisar esses detalhes da secret.
 
