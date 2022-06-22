@@ -55,6 +55,7 @@
       - [Descrevendo a secret](#descrevendo-a-secret-1)
       - [Visualizando o `YML` dessa secret](#visualizando-o-yml-dessa-secret)
       - [Criando um POD para a secret com variaveis](#criando-um-pod-para-a-secret-com-variaveis)
+  - [ConfigMaps no Kubernetes](#configmaps-no-kubernetes)
 
 ## Volumes no Kubernetes
 
@@ -1039,3 +1040,18 @@ PWD='/'
 SHLVL='1'
 TERM='xterm'
 ```
+
+## ConfigMaps no Kubernetes
+
+O ConfigMaps dentro do kubernetes consiste na mesma ideia dos secrets, diferenca e que voce pode adicionar configuracoes dentro do POD, sem buidar imagem ou volume.
+
+- Criando alguns arquivos aqui de teste
+
+`mkdir frutas`
+
+- Agora crie os arquivos dentro desse diretorio
+
+`echo verde > limao`
+`echo verde > vermelho`
+`echo vermelho > morango`
+
