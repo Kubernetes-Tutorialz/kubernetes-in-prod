@@ -51,6 +51,9 @@
     - [Acessando o POD](#acessando-o-pod)
     - [Deletando nossa secret criada](#deletando-nossa-secret-criada)
     - [Criando a `secret` usando o modo literal](#criando-a-secret-usando-o-modo-literal)
+      - [Listando a secret](#listando-a-secret)
+      - [Descrevendo a secret](#descrevendo-a-secret-1)
+      - [Visualizando o `YML` dessa secret](#visualizando-o-yml-dessa-secret)
 
 ## Volumes no Kubernetes
 
@@ -907,4 +910,58 @@ secret.txt
 `# kubectl delete pods test-secret`
 
 ### Criando a `secret` usando o modo literal
+
+`# kubectl create secret generic my-literal-secret --from-literal user=amaury --from-literal  password=teste99`
+
+#### Listando a secret
+
+```bash
+# kubectl get secrets 
+NAME                TYPE     DATA   AGE
+my-literal-secret   Opaque   2      72s
+my-secret           Opaque   1      10h
+```
+
+#### Descrevendo a secret
+
+```bash
+# kubectl describe secrets my-literal-secret 
+Name:         my-literal-secret
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Type:  Opaque
+
+Data
+====
+password:  7 bytes
+user:      6 bytes
+```
+
+#### Visualizando o `YML` dessa secret
+
+```yml
+# kubectl get secrets my-literal-secret -o yaml
+apiVersion: v1
+data:
+  password: dGVzdGU5OQ==
+  user: YW1hdXJ5
+kind: Secret
+metadata:
+  creationTimestamp: "2022-06-20T16:11:21Z"
+  name: my-literal-secret
+  namespace: default
+  resourceVersion: "263818"
+  uid: d03b9dd2-6185-4f35-bc76-a2edbcac2819
+type: Opaque
+```
+
+Veja, agora foi executar um comando `decode` para ver meu usuario:
+
+```bash
+# echo "YW1hdXJ5" | base64 --decode
+amaury[root@kubernetes-cluster ~]#
+```
+
 
