@@ -48,6 +48,9 @@
     - [Criando um POD para demonstrar](#criando-um-pod-para-demonstrar)
     - [Listando o POD](#listando-o-pod)
     - [Descrevendo o POD](#descrevendo-o-pod)
+    - [Acessando o POD](#acessando-o-pod)
+    - [Deletando nossa secret criada](#deletando-nossa-secret-criada)
+    - [Criando a `secret` usando o modo literal](#criando-a-secret-usando-o-modo-literal)
 
 ## Volumes no Kubernetes
 
@@ -882,3 +885,26 @@ Events:
   Normal  Created    <invalid>  kubelet            Created container busy
   Normal  Started    <invalid>  kubelet            Started container busy
   ```
+
+  ### Acessando o POD
+
+  `# kubectl exec -ti test-secret -- sh`
+
+  Agora vamos ao diretorio de acordo com o POD que foi criado:
+
+```bash
+  # kubectl exec -ti test-secret -- sh
+/ # 
+/ # ls
+bin   dev   etc   home  proc  root  sys   tmp   usr   var
+/ # cd tmp/giropops/
+/tmp/giropops # ls
+secret.txt
+```
+
+### Deletando nossa secret criada
+
+`# kubectl delete pods test-secret`
+
+### Criando a `secret` usando o modo literal
+
