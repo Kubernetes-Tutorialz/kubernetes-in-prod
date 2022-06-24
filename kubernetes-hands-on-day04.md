@@ -57,7 +57,7 @@
       - [Criando um POD para a secret com variaveis](#criando-um-pod-para-a-secret-com-variaveis)
   - [ConfigMaps no Kubernetes](#configmaps-no-kubernetes)
     - [Criando o `ConfigMap`](#criando-o-configmap)
-    - [Criando o POD de teste](#criando-o-pod-de-teste)
+    - [Criando o POD de teste para o ConfigMap](#criando-o-pod-de-teste-para-o-configmap)
 
 ## Volumes no Kubernetes
 
@@ -1072,16 +1072,50 @@ cores-frutas       6      11s
 kube-root-ca.crt   1      4d15h
 ```
 
-- 
+- Descrevendo esse Configmap:
+
+```bash
+# kubectl describe configmaps cores-frutas 
+Name:         cores-frutas
+Namespace:    default     
+Labels:       <none>      
+Annotations:  <none>      
+
+Data
+====
+uva:
+----
+roxa
+banana:
+----
+amarelo
+
+limao:
+----
+verde
+
+melancia:
+----
+verde e vermelho
+
+morango:
+----
+vermelho
+
+predileta:
+----
+kiwi
 
 
+BinaryData
+====
 
+Events:  <none>
+```
 
+### Criando o POD de teste para o ConfigMap
 
-
-
-
-### Criando o POD de teste
+`# kubectl create -f pod_configmap.yml`
 
 ```yml
 apiVersion: v1
@@ -1103,3 +1137,71 @@ spec:
           name: cores-frutas
           key: predileta
 ```
+
+- Listando esse POD:
+
+```bash
+# kubectl get pods -n default busybox-configmap 
+NAME                READY   STATUS    RESTARTS   AGE
+busybox-configmap   1/1     Running   0          64s
+```
+
+- Descrevendo esse POD;
+
+```bash
+# kubectl describe pods -n default busybox-configmap 
+Name:         busybox-configmap
+Namespace:    default
+Priority:     0
+Node:         kubernetes-node01/192.168.0.235
+Start Time:   Tue, 21 Jun 2022 03:35:38 -0300
+Labels:       <none>
+Annotations:  <none>
+Status:       Running
+IP:           10.44.0.2
+IPs:
+  IP:  10.44.0.2
+Containers:
+  busy-configmap:
+    Container ID:  containerd://1515fd45bdf19f9aa5962ebf1d42cd599c270c5f31bb2f9c59dcf110f142bcf1
+    Image:         busybox
+    Image ID:      docker.io/library/busybox@sha256:3614ca5eacf0a3a1bcc361c939202a974b4902b9334ff36eb29ffe9011aaad83
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      sleep
+      3600
+    State:          Running
+      Started:      Tue, 21 Jun 2022 03:35:41 -0300
+    Ready:          True
+    Restart Count:  0
+    Environment:
+      frutas:  <set to the key 'predileta' of config map 'cores-frutas'>  Optional: false
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-md6dr (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  kube-api-access-md6dr:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age    From               Message
+  ----    ------     ----   ----               -------
+  Normal  Scheduled  2m16s  default-scheduler  Successfully assigned default/busybox-configmap to kubernetes-node01
+  Normal  Pulling    4s     kubelet            Pulling image "busybox"
+  Normal  Pulled     3s     kubelet            Successfully pulled image "busybox" in 1.634778673s
+  Normal  Created    3s     kubelet            Created container busy-configmap
+  Normal  Started    2s     kubelet            Started container busy-configmap
+  ```
