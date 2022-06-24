@@ -1413,3 +1413,20 @@ Events:
   Normal  Created    7m32s  kubelet            Created container busy-configmap
   Normal  Started    7m32s  kubelet            Started container busy-configmap
 ```
+
+- Acessando esse POD:
+
+```bash
+# kubectl exec -ti busybox-configmap-file -- sh
+/ #
+/ # ls -lh /etc/frutas/
+total 0
+lrwxrwxrwx    1 root     root          13 Jun 21 06:44 banana -> ..data/banana
+lrwxrwxrwx    1 root     root          12 Jun 21 06:44 limao -> ..data/limao
+lrwxrwxrwx    1 root     root          15 Jun 21 06:44 melancia -> ..data/melancia
+lrwxrwxrwx    1 root     root          14 Jun 21 06:44 morango -> ..data/morango
+lrwxrwxrwx    1 root     root          16 Jun 21 06:44 predileta -> ..data/predileta
+lrwxrwxrwx    1 root     root          10 Jun 21 06:44 uva -> ..data/uva
+```
+
+
