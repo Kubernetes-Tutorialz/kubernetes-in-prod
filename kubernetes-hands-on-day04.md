@@ -1318,3 +1318,98 @@ uva='roxa'
 
 ### Criando mais outro POD para arquivos do Configmap
 
+`# kubectl create -f pod_configmap_file.yml`
+
+```yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox-configmap-file
+  namespace: default
+spec:
+  containers:
+  - image: busybox
+    name: busy-configmap
+    command:
+      - sleep
+      - "3600"
+    volumeMounts:
+    - name: meu-configmap-vol
+      mountPath: /etc/frutas
+  volumes:
+  - name: meu-configmap-vol
+    configMap:
+      name: cores-frutas
+```
+
+- Listando esse POD:
+
+```bash
+# kubectl get pods busybox-configmap-file 
+NAME                     READY   STATUS    RESTARTS   AGE
+busybox-configmap-file   1/1     Running   0          17s
+```
+
+- Descrevendo esse POD
+
+```bash
+# kubectl describe pods busybox-configmap-file 
+Name:         busybox-configmap-file
+Namespace:    default
+Priority:     0
+Node:         kubernetes-node02/192.168.0.200
+Start Time:   Tue, 21 Jun 2022 03:44:36 -0300
+Labels:       <none>
+Annotations:  <none>
+Status:       Running
+IP:           10.32.0.4
+IPs:
+  IP:  10.32.0.4
+Containers:
+  busy-configmap:
+    Container ID:  containerd://d07c5f819d21eca96fe965881b75c04a00e4e6ba313cd591ea8cd3ba542f63f5
+    Image:         busybox
+    Image ID:      docker.io/library/busybox@sha256:3614ca5eacf0a3a1bcc361c939202a974b4902b9334ff36eb29ffe9011aaad83
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      sleep
+      3600
+    State:          Running
+      Started:      Tue, 21 Jun 2022 03:44:42 -0300
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /etc/frutas from meu-configmap-vol (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-xqqgs (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  meu-configmap-vol:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      cores-frutas
+    Optional:  false
+  kube-api-access-xqqgs:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age    From               Message
+  ----    ------     ----   ----               -------
+  Normal  Scheduled  103s   default-scheduler  Successfully assigned default/busybox-configmap-file to kubernetes-node02
+  Normal  Pulling    7m37s  kubelet            Pulling image "busybox"
+  Normal  Pulled     7m32s  kubelet            Successfully pulled image "busybox" in 4.73437854s
+  Normal  Created    7m32s  kubelet            Created container busy-configmap
+  Normal  Started    7m32s  kubelet            Started container busy-configmap
+```
