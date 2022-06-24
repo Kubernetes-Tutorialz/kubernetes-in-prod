@@ -58,6 +58,8 @@
   - [ConfigMaps no Kubernetes](#configmaps-no-kubernetes)
     - [Criando o `ConfigMap`](#criando-o-configmap)
     - [Criando o POD de teste para o ConfigMap](#criando-o-pod-de-teste-para-o-configmap)
+    - [Testando o ConfigMap com mais variaveis](#testando-o-configmap-com-mais-variaveis)
+    - [Criando mais outro POD para arquivos do Configmap](#criando-mais-outro-pod-para-arquivos-do-configmap)
 
 ## Volumes no Kubernetes
 
@@ -1205,3 +1207,114 @@ Events:
   Normal  Created    3s     kubelet            Created container busy-configmap
   Normal  Started    2s     kubelet            Started container busy-configmap
   ```
+
+  - Acessando esse POD:
+
+Veja que ele me trouxe os valores dentro das variaveis sendo frutas = kiwi.
+
+```bash
+# kubectl exec -ti busybox-configmap -- sh
+/ #
+/ # set
+HISTFILE='/root/.ash_history'
+HOME='/root'
+HOSTNAME='busybox-configmap'
+IFS='
+'
+KUBERNETES_PORT='tcp://10.96.0.1:443'
+KUBERNETES_PORT_443_TCP='tcp://10.96.0.1:443'
+KUBERNETES_PORT_443_TCP_ADDR='10.96.0.1'
+KUBERNETES_PORT_443_TCP_PORT='443'
+KUBERNETES_PORT_443_TCP_PROTO='tcp'
+KUBERNETES_SERVICE_HOST='10.96.0.1'
+KUBERNETES_SERVICE_PORT='443'
+KUBERNETES_SERVICE_PORT_HTTPS='443'
+LINENO=''
+OPTIND='1'
+PATH='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+PPID='0'
+PS1='\w \$ '
+PS2='> '
+PS4='+ '
+PWD='/'
+SHLVL='1'
+TERM='xterm'
+frutas='kiwi
+```
+
+### Testando o ConfigMap com mais variaveis
+
+- Primeiro precisamos criar o POD:
+
+`# kubectl create -f pod_configmapv2.yml`
+
+```yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox-configmap-env
+  namespace: default
+spec:
+  containers:
+  - image: busybox
+    name: busy-configmap
+    command:
+      - sleep
+      - "3600"
+    envFrom:
+    - configMapRef:
+        name: cores-frutas
+```
+
+- Listando esse POD:
+
+```bash
+# kubectl get pods busybox-configmap-env 
+NAME                    READY   STATUS    RESTARTS   AGE
+busybox-configmap-env   1/1     Running   0          24s
+```
+
+- Acessando esse POD e verificando que ele trouxe os valores atraves de variaveis
+
+```bash
+ kubectl exec -ti busybox-configmap-env -- sh
+/ #
+/ # set
+HISTFILE='/root/.ash_history'
+HOME='/root'
+HOSTNAME='busybox-configmap-env'
+IFS='
+'
+KUBERNETES_PORT='tcp://10.96.0.1:443'
+KUBERNETES_PORT_443_TCP='tcp://10.96.0.1:443'
+KUBERNETES_PORT_443_TCP_ADDR='10.96.0.1'
+KUBERNETES_PORT_443_TCP_PORT='443'
+KUBERNETES_PORT_443_TCP_PROTO='tcp'
+KUBERNETES_SERVICE_HOST='10.96.0.1'
+KUBERNETES_SERVICE_PORT='443'
+KUBERNETES_SERVICE_PORT_HTTPS='443'
+LINENO=''
+OPTIND='1'
+PATH='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+PPID='0'
+PS1='\w \$ '
+PS2='> '
+PS4='+ '
+PWD='/'
+SHLVL='1'
+TERM='xterm'
+banana='amarelo
+'
+limao='verde
+'
+melancia='verde e vermelho
+'
+morango='vermelho
+'
+predileta='kiwi
+'
+uva='roxa'
+```
+
+### Criando mais outro POD para arquivos do Configmap
+
