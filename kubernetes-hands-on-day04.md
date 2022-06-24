@@ -56,6 +56,7 @@
       - [Visualizando o `YML` dessa secret](#visualizando-o-yml-dessa-secret)
       - [Criando um POD para a secret com variaveis](#criando-um-pod-para-a-secret-com-variaveis)
   - [ConfigMaps no Kubernetes](#configmaps-no-kubernetes)
+    - [Criando o `ConfigMap`](#criando-o-configmap)
     - [Criando o POD de teste](#criando-o-pod-de-teste)
 
 ## Volumes no Kubernetes
@@ -1055,6 +1056,30 @@ O ConfigMaps dentro do kubernetes consiste na mesma ideia dos secrets, diferenca
 `echo verde > limao`
 `echo verde > vermelho`
 `echo vermelho > morango`
+
+### Criando o `ConfigMap`
+
+- Vamos criar o configmap dentro do Kubernetes:
+
+`# kubectl create configmap cores-frutas --from-literal=uva=roxa --from-file=predileta --from-file=frutas/`
+
+- Listando ele:
+
+```bash
+# kubectl get configmaps 
+NAME               DATA   AGE  
+cores-frutas       6      11s  
+kube-root-ca.crt   1      4d15h
+```
+
+- 
+
+
+
+
+
+
+
 
 ### Criando o POD de teste
 
