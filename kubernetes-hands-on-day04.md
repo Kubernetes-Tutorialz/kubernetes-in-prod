@@ -65,6 +65,7 @@
     - [Entendendo o role do InitContainer](#entendendo-o-role-do-initcontainer)
   - [RBAC](#rbac)
     - [Criando uma `serviceaccount`](#criando-uma-serviceaccount)
+    - [Listando mais clusterole](#listando-mais-clusterole)
 
 ## Volumes no Kubernetes
 
@@ -1603,7 +1604,118 @@ amaury    0         6s
 default   0         8d
 ```
 
+- Descrevendo esse serviceaccount:
 
+```bash
+# kubectl describe serviceaccounts amaury 
+Name:                amaury 
+Namespace:           default
+Labels:              <none> 
+Annotations:         <none> 
+Image pull secrets:  <none> 
+Mountable secrets:   <none> 
+Tokens:              <none> 
+Events:              <none>
+```
 
+Podemos associar esse serviceaccount a um determinado `cluster-role`.
 
+### Listando mais clusterole
 
+```bash
+# kubectl get clusterrole
+NAME                                                                   CREATED AT
+admin                                                                  2022-06-16T15:11:27Z
+cluster-admin                                                          2022-06-16T15:11:27Z
+edit                                                                   2022-06-16T15:11:27Z
+kubeadm:get-nodes                                                      2022-06-16T15:11:30Z
+system:aggregate-to-admin                                              2022-06-16T15:11:27Z
+system:aggregate-to-edit                                               2022-06-16T15:11:27Z
+system:aggregate-to-view                                               2022-06-16T15:11:27Z
+system:aggregated-metrics-reader                                       2022-06-19T17:45:08Z
+system:auth-delegator                                                  2022-06-16T15:11:27Z
+system:basic-user                                                      2022-06-16T15:11:27Z
+system:certificates.k8s.io:certificatesigningrequests:nodeclient       2022-06-16T15:11:27Z
+system:certificates.k8s.io:certificatesigningrequests:selfnodeclient   2022-06-16T15:11:28Z
+system:certificates.k8s.io:kube-apiserver-client-approver              2022-06-16T15:11:28Z
+system:certificates.k8s.io:kube-apiserver-client-kubelet-approver      2022-06-16T15:11:28Z
+system:certificates.k8s.io:kubelet-serving-approver                    2022-06-16T15:11:28Z
+system:certificates.k8s.io:legacy-unknown-approver                     2022-06-16T15:11:28Z
+system:controller:attachdetach-controller                              2022-06-16T15:11:28Z
+system:controller:certificate-controller                               2022-06-16T15:11:28Z
+system:controller:clusterrole-aggregation-controller                   2022-06-16T15:11:28Z
+system:controller:cronjob-controller                                   2022-06-16T15:11:28Z
+system:controller:daemon-set-controller                                2022-06-16T15:11:28Z
+system:controller:deployment-controller                                2022-06-16T15:11:28Z
+system:controller:disruption-controller                                2022-06-16T15:11:28Z
+system:controller:endpoint-controller                                  2022-06-16T15:11:28Z
+system:controller:endpointslice-controller                             2022-06-16T15:11:28Z
+system:controller:endpointslicemirroring-controller                    2022-06-16T15:11:28Z
+system:controller:ephemeral-volume-controller                          2022-06-16T15:11:28Z
+system:controller:expand-controller                                    2022-06-16T15:11:28Z
+system:controller:generic-garbage-collector                            2022-06-16T15:11:28Z
+system:controller:horizontal-pod-autoscaler                            2022-06-16T15:11:28Z
+system:controller:job-controller                                       2022-06-16T15:11:28Z
+system:controller:namespace-controller                                 2022-06-16T15:11:28Z
+system:controller:node-controller                                      2022-06-16T15:11:28Z
+system:controller:persistent-volume-binder                             2022-06-16T15:11:28Z
+system:controller:pod-garbage-collector                                2022-06-16T15:11:28Z
+system:controller:pv-protection-controller                             2022-06-16T15:11:28Z
+system:controller:pvc-protection-controller                            2022-06-16T15:11:28Z
+system:controller:replicaset-controller                                2022-06-16T15:11:28Z
+system:controller:replication-controller                               2022-06-16T15:11:28Z
+system:controller:resourcequota-controller                             2022-06-16T15:11:28Z
+system:controller:root-ca-cert-publisher                               2022-06-16T15:11:28Z
+system:controller:route-controller                                     2022-06-16T15:11:28Z
+system:controller:service-account-controller                           2022-06-16T15:11:28Z
+system:controller:service-controller                                   2022-06-16T15:11:28Z
+system:controller:statefulset-controller                               2022-06-16T15:11:28Z
+system:controller:ttl-after-finished-controller                        2022-06-16T15:11:28Z
+system:controller:ttl-controller                                       2022-06-16T15:11:28Z
+system:coredns                                                         2022-06-16T15:11:30Z
+system:discovery                                                       2022-06-16T15:11:27Z
+system:heapster                                                        2022-06-16T15:11:27Z
+system:kube-aggregator                                                 2022-06-16T15:11:27Z
+system:kube-controller-manager                                         2022-06-16T15:11:27Z
+system:kube-dns                                                        2022-06-16T15:11:27Z
+system:kube-scheduler                                                  2022-06-16T15:11:28Z
+system:kubelet-api-admin                                               2022-06-16T15:11:27Z
+system:metrics-server                                                  2022-06-19T17:45:08Z
+system:monitoring                                                      2022-06-16T15:11:27Z
+system:node                                                            2022-06-16T15:11:27Z
+system:node-bootstrapper                                               2022-06-16T15:11:27Z
+system:node-problem-detector                                           2022-06-16T15:11:27Z
+system:node-proxier                                                    2022-06-16T15:11:28Z
+system:persistent-volume-provisioner                                   2022-06-16T15:11:27Z
+system:public-info-viewer                                              2022-06-16T15:11:27Z
+system:service-account-issuer-discovery                                2022-06-16T15:11:28Z
+system:volume-scheduler                                                2022-06-16T15:11:28Z
+view                                                                   2022-06-16T15:11:27Z
+weave-net                                                              2022-06-16T15:15:20Z
+```
+
+- Vamos acessar essa:
+
+```bash
+# kubectl get clusterrole | grep admin
+admin                                                                  2022-06-16T15:11:27Z
+cluster-admin                                                          2022-06-16T15:11:27Z
+system:aggregate-to-admin                                              2022-06-16T15:11:27Z
+system:kubelet-api-admin                                               2022-06-16T15:11:27Z
+```
+
+- Vamos pegar mais detalhes dessa role
+
+Veja que eu posso fazer de tudo com essa role dentro do cluster, perceba em resources:
+
+```bash
+# kubectl describe clusterrole cluster-admin 
+Name:         cluster-admin
+Labels:       kubernetes.io/bootstrapping=rbac-defaults
+Annotations:  rbac.authorization.kubernetes.io/autoupdate: true
+PolicyRule:
+  Resources  Non-Resource URLs  Resource Names  Verbs
+  ---------  -----------------  --------------  -----
+  *.*        []                 []              [*]
+             [*]                []              [*]
+```
