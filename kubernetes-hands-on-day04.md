@@ -60,6 +60,8 @@
     - [Criando o POD de teste para o ConfigMap](#criando-o-pod-de-teste-para-o-configmap)
     - [Testando o ConfigMap com mais variaveis](#testando-o-configmap-com-mais-variaveis)
     - [Criando mais outro POD para arquivos do Configmap](#criando-mais-outro-pod-para-arquivos-do-configmap)
+  - [InitContainer no Kubernetes](#initcontainer-no-kubernetes)
+    - [Criando o POD para o InitContainer](#criando-o-pod-para-o-initcontainer)
 
 ## Volumes no Kubernetes
 
@@ -1429,4 +1431,37 @@ lrwxrwxrwx    1 root     root          16 Jun 21 06:44 predileta -> ..data/predi
 lrwxrwxrwx    1 root     root          10 Jun 21 06:44 uva -> ..data/uva
 ```
 
+## InitContainer no Kubernetes
 
+Esse recurso tras a ideia de voce executar outro comando, alguma tarefa antes da app subir, ai que entra esse recurso de InitContainer. Ele entra antes do meu container especial, pensa que ele funciona como o init, primeiro processo do sistema do sistema LINUX.
+
+### Criando o POD para o InitContainer
+
+``
+
+```yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: init-demo
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: workdir
+      mountPath: /usr/share/nginx/html
+  initContainers:
+  - name: install
+    image: busybox
+    command: ['wget','-O','/work-dir/index.html','http://linuxtips.io']
+    volumeMounts:
+    - name: workdir
+      mountPath: "/work-dir"
+  dnsPolicy: Default
+  volumes:
+  - name: workdir
+    emptyDir: {}
+```
