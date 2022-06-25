@@ -66,6 +66,7 @@
   - [RBAC](#rbac)
     - [Criando uma `serviceaccount`](#criando-uma-serviceaccount)
     - [Listando mais clusterole](#listando-mais-clusterole)
+    - [Criando um `clusterolebinding` completa](#criando-um-clusterolebinding-completa)
 
 ## Volumes no Kubernetes
 
@@ -1589,7 +1590,7 @@ webserver                1/1     Running           1 (6h53m ago)   5d2h
 
 ## RBAC
 
-Vamos aprender mais sobre `RBAC` dentro do kubernetes, gerenciamento de usuarios, permissoes.
+Vamos aprender mais sobre `RBAC` dentro do kubernetes, gerenciamento de usuarios, permissoes. O controle de acesso baseado em função (RBAC) é um método de regular o acesso a recursos de computador ou rede com base nas funções de usuários individuais em sua organização.
 
 ### Criando uma `serviceaccount`
 
@@ -1719,3 +1720,90 @@ PolicyRule:
   *.*        []                 []              [*]
              [*]                []              [*]
 ```
+
+- Acessando uma outra role para colher mais detalhes:
+
+A ideia aqui e saber que eu posso pegar meu usuario amaury que  foi criado e atribuir a ele essa role de view dentro do cluster de Kubernetes. Para esse caso eu teria priviligeios apenas de `view`, ou seja, para PODS eu so poderia executar verbos como get, list e watch.
+
+```bash
+# kubectl describe clusterrole view
+Name:         view
+Labels:       kubernetes.io/bootstrapping=rbac-defaults
+              rbac.authorization.k8s.io/aggregate-to-edit=true
+Annotations:  rbac.authorization.kubernetes.io/autoupdate: true
+PolicyRule:
+  Resources                                    Non-Resource URLs  Resource Names  Verbs
+  ---------                                    -----------------  --------------  -----
+  bindings                                     []                 []              [get list watch]
+  configmaps                                   []                 []              [get list watch]
+  endpoints                                    []                 []              [get list watch]
+  events                                       []                 []              [get list watch]
+  limitranges                                  []                 []              [get list watch]
+  namespaces/status                            []                 []              [get list watch]
+  namespaces                                   []                 []              [get list watch]
+  persistentvolumeclaims/status                []                 []              [get list watch]
+  persistentvolumeclaims                       []                 []              [get list watch]
+  pods/log                                     []                 []              [get list watch]
+  pods/status                                  []                 []              [get list watch]
+  pods                                         []                 []              [get list watch]
+  replicationcontrollers/scale                 []                 []              [get list watch]
+  replicationcontrollers/status                []                 []              [get list watch]
+  replicationcontrollers                       []                 []              [get list watch]
+  resourcequotas/status                        []                 []              [get list watch]
+  resourcequotas                               []                 []              [get list watch]
+  serviceaccounts                              []                 []              [get list watch]
+  services/status                              []                 []              [get list watch]
+  services                                     []                 []              [get list watch]
+  controllerrevisions.apps                     []                 []              [get list watch]
+  daemonsets.apps/status                       []                 []              [get list watch]
+  daemonsets.apps                              []                 []              [get list watch]
+  deployments.apps/scale                       []                 []              [get list watch]
+  deployments.apps/status                      []                 []              [get list watch]
+  deployments.apps                             []                 []              [get list watch]
+  replicasets.apps/scale                       []                 []              [get list watch]
+  replicasets.apps/status                      []                 []              [get list watch]
+  replicasets.apps                             []                 []              [get list watch]
+  statefulsets.apps/scale                      []                 []              [get list watch]
+  statefulsets.apps/status                     []                 []              [get list watch]
+  statefulsets.apps                            []                 []              [get list watch]
+  horizontalpodautoscalers.autoscaling/status  []                 []              [get list watch]
+  horizontalpodautoscalers.autoscaling         []                 []              [get list watch]
+  cronjobs.batch/status                        []                 []              [get list watch]
+  cronjobs.batch                               []                 []              [get list watch]
+  jobs.batch/status                            []                 []              [get list watch]
+  jobs.batch                                   []                 []              [get list watch]
+  endpointslices.discovery.k8s.io              []                 []              [get list watch]
+  daemonsets.extensions/status                 []                 []              [get list watch]
+  daemonsets.extensions                        []                 []              [get list watch]
+  deployments.extensions/scale                 []                 []              [get list watch]
+  deployments.extensions/status                []                 []              [get list watch]
+  deployments.extensions                       []                 []              [get list watch]
+  ingresses.extensions/status                  []                 []              [get list watch]
+  ingresses.extensions                         []                 []              [get list watch]
+  networkpolicies.extensions                   []                 []              [get list watch]
+  replicasets.extensions/scale                 []                 []              [get list watch]
+  replicasets.extensions/status                []                 []              [get list watch]
+  replicasets.extensions                       []                 []              [get list watch]
+  replicationcontrollers.extensions/scale      []                 []              [get list watch]
+  nodes.metrics.k8s.io                         []                 []              [get list watch]
+  pods.metrics.k8s.io                          []                 []              [get list watch]
+  ingresses.networking.k8s.io/status           []                 []              [get list watch]
+  ingresses.networking.k8s.io                  []                 []              [get list watch]
+  networkpolicies.networking.k8s.io            []                 []              [get list watch]
+  poddisruptionbudgets.policy/status           []                 []              [get list watch]
+  poddisruptionbudgets.policy                  []                 []              [get list watch]
+```
+
+### Criando um `clusterolebinding` completa
+
+Vamos criar uma `clusterrolebinding` para associar com o `serviceaccount` amaury com a funcao de `clusterole`:
+
+`kubectl create clusterrolebinding nika --serviceaccount=default:amaury --clusterrole=cluster-admin`
+
+- Vamos listar essa clusterolebinding:
+
+```bash
+# kubectl get clusterrolebindings.rbac.authorization.k8s.io | grep nika
+nika                                                   ClusterRole/cluster-admin                                                          30s
+```
+
