@@ -67,6 +67,7 @@
     - [Criando uma `serviceaccount`](#criando-uma-serviceaccount)
     - [Listando mais clusterole](#listando-mais-clusterole)
     - [Criando um `clusterolebinding` completa](#criando-um-clusterolebinding-completa)
+    - [Criando um exemplo com `YML`](#criando-um-exemplo-com-yml)
 
 ## Volumes no Kubernetes
 
@@ -1805,5 +1806,86 @@ Vamos criar uma `clusterrolebinding` para associar com o `serviceaccount` amaury
 ```bash
 # kubectl get clusterrolebindings.rbac.authorization.k8s.io | grep nika
 nika                                                   ClusterRole/cluster-admin                                                          30s
+```
+
+- Descrevendo essa clusterolebinding criada:
+
+Isso significa que agora o serviceaccount amaury pode executar tudo que existe de permissoes dentro do clusterole setado como cluster-admin.
+
+```bash
+# kubectl describe clusterrolebindings.rbac.authorization.k8s.io nika
+Name:         nika
+Labels:       <none>
+Annotations:  <none>
+Role:
+  Kind:  ClusterRole
+  Name:  cluster-admin
+Subjects:
+  Kind            Name    Namespace
+  ----            ----    ---------
+  ServiceAccount  amaury  default
+```
+
+- Veja o poder que o serviceaccount pode fazer dentro do cluster:
+
+```bash
+# kubectl describe clusterrole cluster-admin 
+Name:         cluster-admin
+Labels:       kubernetes.io/bootstrapping=rbac-defaults
+Annotations:  rbac.authorization.kubernetes.io/autoupdate: true
+PolicyRule:
+  Resources  Non-Resource URLs  Resource Names  Verbs
+  ---------  -----------------  --------------  -----
+  *.*        []                 []              [*]
+             [*]                []              [*]
+```
+
+### Criando um exemplo com `YML`
+
+Vamos primeiro criar esse serviceaccount usando `YML`:
+
+`# kubectl create -f admin-user.yml`
+
+```yml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: admin-user
+  namespace: kube-system
+```
+
+Agora depois de criado vaos listar isso:
+
+```bash
+# kubectl get serviceaccounts -n kube-system admin-user 
+NAME         SECRETS   AGE
+admin-user   0         57s
+```
+
+- Vamos criar nosso `clusterrolebinding` 
+
+`# kubectl create -f cluster-role-binding.yml`
+
+```yml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: admin-user
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: admin-user
+  namespace: kube-system
+```
+
+- Listando:
+
+```bash
+# kubectl get clusterrolebindings.rbac.authorization.k8s.io admin-user  
+NAME         ROLE                        AGE
+admin-user   ClusterRole/cluster-admin   86s
 ```
 
