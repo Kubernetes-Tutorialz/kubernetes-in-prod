@@ -63,6 +63,8 @@
   - [InitContainer no Kubernetes](#initcontainer-no-kubernetes)
     - [Criando o POD para o InitContainer](#criando-o-pod-para-o-initcontainer)
     - [Entendendo o role do InitContainer](#entendendo-o-role-do-initcontainer)
+  - [RBAC](#rbac)
+    - [Criando uma `serviceaccount`](#criando-uma-serviceaccount)
 
 ## Volumes no Kubernetes
 
@@ -1582,4 +1584,26 @@ webserver                1/1     Running           1 (6h53m ago)   5d2h
   - Agora vamos acessar esse POD para pegar mais detalhes do arquivo que ele tinha criado:
 
 `# kubectl exec -ti init-demo -- cat /usr/share/nginx/html/index.html`
+
+
+## RBAC
+
+Vamos aprender mais sobre `RBAC` dentro do kubernetes, gerenciamento de usuarios, permissoes.
+
+### Criando uma `serviceaccount`
+
+`# kubectl create serviceaccount amaury`
+
+- Listando essa serviceaccount:
+
+```bash
+# kubectl get serviceaccounts 
+NAME      SECRETS   AGE
+amaury    0         6s
+default   0         8d
+```
+
+
+
+
 
