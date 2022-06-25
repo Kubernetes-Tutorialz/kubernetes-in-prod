@@ -1566,6 +1566,20 @@ Events:
   Normal  Scheduled  5m37s  default-scheduler  Successfully assigned default/init-demo to kubernetes-node01
   ```
 
-  ### Entendendo o role do InitContainer
+### Entendendo o role do InitContainer
 
-  Basicamente ele executou o comando que estava sendo pedido dentro do POD, para depois ele criar o container principal.
+Basicamente ele executou o comando que estava sendo pedido dentro do POD, para depois ele criar o container principal. Ele prepara tudo antes para depois criar o container:
+
+```bash
+  # kubectl get pods
+NAME                     READY   STATUS            RESTARTS        AGE
+busybox-configmap-file   1/1     Running           11 (52m ago)    3d13h
+init-demo                0/1     PodInitializing   0               15s
+nginx                    1/1     Running           2 (6h53m ago)   8d
+webserver                1/1     Running           1 (6h53m ago)   5d2h
+```
+
+  - Agora vamos acessar esse POD para pegar mais detalhes do arquivo que ele tinha criado:
+
+`# kubectl exec -ti init-demo -- cat /usr/share/nginx/html/index.html`
+
