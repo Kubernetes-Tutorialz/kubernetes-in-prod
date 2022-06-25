@@ -62,6 +62,7 @@
     - [Criando mais outro POD para arquivos do Configmap](#criando-mais-outro-pod-para-arquivos-do-configmap)
   - [InitContainer no Kubernetes](#initcontainer-no-kubernetes)
     - [Criando o POD para o InitContainer](#criando-o-pod-para-o-initcontainer)
+    - [Entendendo o role do InitContainer](#entendendo-o-role-do-initcontainer)
 
 ## Volumes no Kubernetes
 
@@ -1437,7 +1438,7 @@ Esse recurso tras a ideia de voce executar outro comando, alguma tarefa antes da
 
 ### Criando o POD para o InitContainer
 
-``
+`# kubectl create -f nginx_initcontainer.yml`
 
 ```yml
 apiVersion: v1
@@ -1465,3 +1466,106 @@ spec:
   - name: workdir
     emptyDir: {}
 ```
+
+- Listando o POD:
+
+```bash
+# kubectl get pods
+NAME                     READY   STATUS            RESTARTS        AGE
+busybox-configmap-file   1/1     Running           11 (52m ago)    3d13h
+init-demo                0/1     PodInitializing   0               15s
+nginx                    1/1     Running           2 (6h53m ago)   8d
+webserver                1/1     Running           1 (6h53m ago)   5d2h
+```
+
+- Descrevendo o POD:
+
+```bash
+# kubectl describe pods init-demo 
+Name:         init-demo
+Namespace:    default
+Priority:     0
+Node:         kubernetes-node01/192.168.0.235
+Start Time:   Fri, 24 Jun 2022 17:37:11 -0300
+Labels:       <none>
+Annotations:  <none>
+Status:       Running
+IP:           10.44.0.1
+IPs:
+  IP:  10.44.0.1
+Init Containers:
+  install:
+    Container ID:  containerd://2fc08a44b192df474e2d984c4d2eca69cecb9aad282981866faafe48bfc19107
+    Image:         busybox
+    Image ID:      docker.io/library/busybox@sha256:3614ca5eacf0a3a1bcc361c939202a974b4902b9334ff36eb29ffe9011aaad83
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      wget
+      -O
+      /work-dir/index.html
+      http://linuxtips.io
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Fri, 24 Jun 2022 17:37:14 -0300
+      Finished:     Fri, 24 Jun 2022 17:37:15 -0300
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-p5wv6 (ro)
+      /work-dir from workdir (rw)
+Containers:
+  nginx:
+    Container ID:   containerd://b74976b2508a9d85cffda6dd623d59296318f80d6af7ba24191a31a0b549d5b3
+    Image:          nginx
+    Image ID:       docker.io/library/nginx@sha256:10f14ffa93f8dedf1057897b745e5ac72ac5655c299dade0aa434c71557697ea
+    Port:           80/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Fri, 24 Jun 2022 17:37:38 -0300
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /usr/share/nginx/html from workdir (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-p5wv6 (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  workdir:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:
+    SizeLimit:  <unset>
+  kube-api-access-p5wv6:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age    From               Message
+  ----    ------     ----   ----               -------
+  Normal  Pulling    11m    kubelet            Pulling image "busybox"
+  Normal  Pulled     11m    kubelet            Successfully pulled image "busybox" in 1.644626294s
+  Normal  Created    11m    kubelet            Created container install
+  Normal  Started    11m    kubelet            Started container install
+  Normal  Pulling    11m    kubelet            Pulling image "nginx"
+  Normal  Pulled     11m    kubelet            Successfully pulled image "nginx" in 21.431061881s
+  Normal  Created    11m    kubelet            Created container nginx
+  Normal  Started    11m    kubelet            Started container nginx
+  Normal  Scheduled  5m37s  default-scheduler  Successfully assigned default/init-demo to kubernetes-node01
+  ```
+
+  ### Entendendo o role do InitContainer
+
+  Basicamente ele executou o comando que estava sendo pedido dentro do POD, para depois ele criar o container principal.
