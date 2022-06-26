@@ -1906,7 +1906,3 @@ Charts dentro do HELM nada mais e que do que um conjunto de manifestos do Kubern
 
 Funciona como se fosse um pacote `.deb` dentro do `apt-get`, essa seria uma analogia entre o gerenciador de pacotes do Debian.
 
-
-
-
-
