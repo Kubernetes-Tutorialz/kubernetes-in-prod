@@ -69,6 +69,8 @@
     - [Criando um `clusterolebinding` completa](#criando-um-clusterolebinding-completa)
     - [Criando um exemplo com `YML`](#criando-um-exemplo-com-yml)
   - [HELM](#helm)
+    - [Mais sobre HELM](#mais-sobre-helm)
+    - [O que e `charts` dentro do `HELM`](#o-que-e-charts-dentro-do-helm)
 
 ## Volumes no Kubernetes
 
@@ -1892,7 +1894,13 @@ admin-user   ClusterRole/cluster-admin   86s
 
 ## HELM
 
-Hora de aprender mais sobre o querido `Helm` dentro do Kubernetes, este que e um projeto graduado da CNCF, ou seja, usao em larga escala por diversas empresas e projetos ao redor do mundo em ambientes de producao. Quando se fala em Helm, estamos falando sobre o gerenciador de pacotes do kubernetes. Os pacotes gerenciados pelo Helm, são chamados de `charts`, que basicamente são formados por um conjunto de manifestos Kubernetes no formato `YAML` e alguns templates que ajudam a manter variáveis dinâmicas de acordo com o ambiente.
+Hora de aprender mais sobre o querido `Helm` dentro do Kubernetes, este que e um projeto graduado da CNCF, ou seja, usado em larga escala por diversas empresas e projetos ao redor do mundo em ambientes de producao. Quando se fala em Helm, estamos falando sobre o gerenciador de pacotes do kubernetes. Os pacotes gerenciados pelo Helm, são chamados de `charts`, que basicamente são formados por um conjunto de manifestos Kubernetes no formato `YAML` e alguns templates que ajudam a manter variáveis dinâmicas de acordo com o ambiente.
 
+
+### Mais sobre HELM
+
+Para as pessoas que esteja  interessadas em aprender mais sobre HELM, fica ligado nesse [link](https://www.cncf.io/projects/helm/) aqui da CNCF.
+
+### O que e `charts` dentro do `HELM`
 
 
