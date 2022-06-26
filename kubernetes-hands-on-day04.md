@@ -1896,7 +1896,6 @@ admin-user   ClusterRole/cluster-admin   86s
 
 Hora de aprender mais sobre o querido `Helm` dentro do Kubernetes, este que e um projeto graduado da CNCF, ou seja, usado em larga escala por diversas empresas e projetos ao redor do mundo em ambientes de producao. Quando se fala em Helm, estamos falando sobre o gerenciador de pacotes do kubernetes. Os pacotes gerenciados pelo Helm, são chamados de `charts`, que basicamente são formados por um conjunto de manifestos Kubernetes no formato `YAML` e alguns templates que ajudam a manter variáveis dinâmicas de acordo com o ambiente.
 
-
 ### Mais sobre HELM
 
 Para as pessoas que estejam  interessadas em aprender mais sobre HELM, fica ligado nesse [link](https://www.cncf.io/projects/helm/) aqui da CNCF.
