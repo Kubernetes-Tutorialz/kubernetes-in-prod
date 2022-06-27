@@ -1913,6 +1913,15 @@ Para que seja possivel a instalacao siga as etapas abaixo:
 
 `curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash -`
 
+Para verificar se esta correta a sua instalacao digite:
+
+```bash
+# helm version
+version.BuildInfo{Version:"v3.9.0", GitCommit:"7ceeda6c585217a19a1131663d8cd1f7d641b2a7", GitTreeState:"clean", GoVersion:"go1.17.5"}
+```
+
+
+
 
 
 
