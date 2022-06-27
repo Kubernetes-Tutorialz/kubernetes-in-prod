@@ -231,3 +231,4 @@ spec:
         - containerPort: 80
 ```
 
+Depois dessa alteracao devemos prosseguir
