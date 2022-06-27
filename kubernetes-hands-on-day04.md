@@ -1909,7 +1909,11 @@ Funciona como se fosse um pacote `.deb` dentro do `apt-get`, essa seria uma anal
 
 ### Instalacao do HELM no Kubernetes Cluster
 
-sasasas
+Para que seja possivel a instalacao siga as etapas abaixo:
+
+`curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash -`
+
+
 
 
 
