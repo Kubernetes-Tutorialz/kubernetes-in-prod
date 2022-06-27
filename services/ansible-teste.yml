@@ -1,0 +1,9 @@
+---
+- name: teste
+  hosts: teste
+  become: true
+  
+
+
+
+...
