@@ -1924,6 +1924,24 @@ version.BuildInfo{Version:"v3.9.0", GitCommit:"7ceeda6c585217a19a1131663d8cd1f7d
 
 Vamos agora iniciar alguns projetos bem legais com Helm usando os charts do Grafana e do Prometheus.
 
+- Para isso, vamos adicionar os repostirios de ambas as ferramentas com Helm:
+
+```bash
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo add grafana https://grafana.github.io/helm-charts
+```
+
+- Listando os repositorios que foram adicionados:
+
+```bash
+# helm repo list
+NAME                    URL
+prometheus-community    https://prometheus-community.github.io/helm-charts
+grafana                 https://grafana.github.io/helm-charts
+```
+
+
+
 
 
 
