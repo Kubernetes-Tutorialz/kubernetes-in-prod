@@ -1,0 +1,21 @@
+# cat pod_configmap_file.yml 
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox-configmap-file
+  namespace: default
+spec:
+  containers:
+  - image: busybox
+    name: busy-configmap
+    command:
+      - sleep
+      - "3600"
+    volumeMounts:
+    - name: meu-configmap-vol
+      mountPath: /etc/frutas
+    resources:
+  volumes:
+  - name: meu-configmap-vol
+    configMap:
+      name: cores-frutas

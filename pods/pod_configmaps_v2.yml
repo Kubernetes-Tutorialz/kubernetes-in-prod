@@ -1,0 +1,17 @@
+# cat pod_configmapv2.yml 
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox-configmap-env
+  namespace: default
+spec:
+  containers:
+  - image: busybox
+    name: busy-configmap
+    command:
+      - sleep
+      - "3600"
+    resources:
+    envFrom:
+    - configMapRef:
+        name: cores-frutas
