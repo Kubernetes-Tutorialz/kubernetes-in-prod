@@ -73,6 +73,7 @@
     - [O que e `charts` dentro do `HELM`](#o-que-e-charts-dentro-do-helm)
     - [Instalacao do HELM no Kubernetes Cluster](#instalacao-do-helm-no-kubernetes-cluster)
     - [Iniciando com Helm Charts](#iniciando-com-helm-charts)
+    - [Criando a estrutura do Charts](#criando-a-estrutura-do-charts)
 
 ## Volumes no Kubernetes
 
@@ -1940,7 +1941,13 @@ prometheus-community    https://prometheus-community.github.io/helm-charts
 grafana                 https://grafana.github.io/helm-charts
 ```
 
-- teste de teste
+### Criando a estrutura do Charts
+
+Para que seja possivel criar a estrutura do Helm Charts, execute o seguinte comando:
+
+`# helm create devops`
+
+
 
 
 
