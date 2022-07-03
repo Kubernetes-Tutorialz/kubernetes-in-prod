@@ -1,11 +1,11 @@
-# cat primeiro_deployments_nginx_helm.yml 
+# cat deployment_nginx02.yml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  generation: 1
   labels:
-    app: giropops
-    run: nginx
-  name: primeiro-deployment
+    app: nginx02
+  name: nginx02
   namespace: default
 spec:
   progressDeadlineSeconds: 600
@@ -13,20 +13,25 @@ spec:
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      run: nginx
+      app: nginx02
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: nginx02
     spec:
       containers:
       - image: nginx
         imagePullPolicy: Always
-        name: nginx2
-        ports:
-        - containerPort: 80
-          protocol: TCP
-        resources: {}
+        name: nginx
+        resources: 
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {}
-      terminationGracePeriodSeconds: 30
