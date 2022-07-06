@@ -75,7 +75,7 @@
     - [Iniciando com Helm Charts](#iniciando-com-helm-charts)
     - [Criando a estrutura do Charts](#criando-a-estrutura-do-charts)
     - [Helm hands-on com NGINX](#helm-hands-on-com-nginx)
-      - [Alguns do Helm utilizados](#alguns-do-helm-utilizados)
+    - [Alguns do Helm utilizados](#alguns-do-helm-utilizados)
 
 ## Volumes no Kubernetes
 
@@ -1975,7 +1975,7 @@ Para que seja possivel treinar mais com Helm, criei um repositorio a parte para 
 
 Acesse [aqui](https://github.com/Kubernetes-Tutorialz/helm-charts-kubernetes-hands-on) o lab de Hel com NGINX.
 
-#### Alguns do Helm utilizados
+### Alguns do Helm utilizados
 
 ```bash
 # wget https://storage.googleapis.com/kubernetes-helm/helm-v2.12.3-linux-amd64.tar.gz
