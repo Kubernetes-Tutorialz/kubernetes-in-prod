@@ -74,7 +74,7 @@
     - [Instalacao do HELM no cluster do Kubernetes](#instalacao-do-helm-no-cluster-do-kubernetes)
     - [Iniciando com Helm Charts](#iniciando-com-helm-charts)
     - [Criando a estrutura do Charts](#criando-a-estrutura-do-charts)
-    - [Helm Hands-on com NGINX](#helm-hands-on-com-nginx)
+    - [Helm hands-on com NGINX](#helm-hands-on-com-nginx)
 
 ## Volumes no Kubernetes
 
@@ -1968,7 +1968,7 @@ devops/
 3 directories, 10 files
 ```
 
-### Helm Hands-on com NGINX
+### Helm hands-on com NGINX
 
 Para que seja possivel treinar mais com Helm, criei um repositorio a parte para que possamos executar outros passos com Hel Chart. A ideia e usar o NGINX para ser deployado com Helm, assim tudo fica mais facil de ser gerenciado com os charts.
 
