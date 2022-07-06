@@ -71,9 +71,10 @@
   - [HELM](#helm)
     - [Mais sobre HELM](#mais-sobre-helm)
     - [O que e `charts` dentro do `HELM`](#o-que-e-charts-dentro-do-helm)
-    - [Instalacao do HELM no Kubernetes Cluster](#instalacao-do-helm-no-kubernetes-cluster)
+    - [Instalacao do HELM no cluster do Kubernetes](#instalacao-do-helm-no-cluster-do-kubernetes)
     - [Iniciando com Helm Charts](#iniciando-com-helm-charts)
     - [Criando a estrutura do Charts](#criando-a-estrutura-do-charts)
+    - [Helm Hands-on com NGINX](#helm-hands-on-com-nginx)
 
 ## Volumes no Kubernetes
 
@@ -1909,7 +1910,7 @@ Charts dentro do HELM nada mais e que do que um conjunto de manifestos do Kubern
 
 Funciona como se fosse um pacote `.deb` dentro do `apt-get`, essa seria uma analogia entre o gerenciador de pacotes do Debian.
 
-### Instalacao do HELM no Kubernetes Cluster
+### Instalacao do HELM no cluster do Kubernetes 
 
 Para que seja possivel a instalacao siga as etapas abaixo:
 
@@ -1947,10 +1948,28 @@ Para que seja possivel criar a estrutura do Helm Charts, execute o seguinte coma
 
 `# helm create devops`
 
+```bash
+# tree devops/
+devops/
+├── charts
+├── Chart.yaml
+├── templates
+│   ├── deployment.yaml
+│   ├── _helpers.tpl
+│   ├── hpa.yaml
+│   ├── ingress.yaml
+│   ├── NOTES.txt
+│   ├── serviceaccount.yaml
+│   ├── service.yaml
+│   └── tests
+│       └── test-connection.yaml
+└── values.yaml
 
+3 directories, 10 files
+```
 
+### Helm Hands-on com NGINX
 
+Para que seja possivel treinar mais com Helm, criei um repositorio a parte para que possamos executar outros passos com Hel Chart. A ideia e usar o NGINX para ser deployado com Helm, assim tudo fica mais facil de ser gerenciado com os charts.
 
-
-
-
+Acesse [aqui](https://github.com/Kubernetes-Tutorialz/helm-charts-kubernetes-hands-on) o lab de Hel com NGINX.
