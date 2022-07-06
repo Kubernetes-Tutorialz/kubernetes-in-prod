@@ -75,6 +75,7 @@
     - [Iniciando com Helm Charts](#iniciando-com-helm-charts)
     - [Criando a estrutura do Charts](#criando-a-estrutura-do-charts)
     - [Helm hands-on com NGINX](#helm-hands-on-com-nginx)
+      - [Alguns do Helm utilizados](#alguns-do-helm-utilizados)
 
 ## Volumes no Kubernetes
 
@@ -1973,3 +1974,28 @@ devops/
 Para que seja possivel treinar mais com Helm, criei um repositorio a parte para que possamos executar outros passos com Hel Chart. A ideia e usar o NGINX para ser deployado com Helm, assim tudo fica mais facil de ser gerenciado com os charts.
 
 Acesse [aqui](https://github.com/Kubernetes-Tutorialz/helm-charts-kubernetes-hands-on) o lab de Hel com NGINX.
+
+#### Alguns do Helm utilizados
+
+```bash
+# wget https://storage.googleapis.com/kubernetes-helm/helm-v2.12.3-linux-amd64.tar.gz
+# tar -vxzf helm-v2.11.0-linux-amd64.tar.gz
+# cd linux-amd64/
+# mv helm /usr/local/bin/
+# mv tiller /usr/local/bin/
+# helm init
+# kubectl create serviceaccount --namespace=kube-system tiller
+# kubectl create clusterrolebinding tiller-cluster-role --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+# kubectl patch deployments -n kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
+# helm install --namespace=monitoring --name=prometheus --version=7.0.0 --set alertmanager.persistentVolume.enabled=false,server.persistentVolume.enabled=false stableprometheus
+# helm list
+# helm search grafana
+# helm install --namespace=monitoring --name=grafana --version=1.12.0 --set=adminUser=admin,adminPassword=admin,service.type=NodePort stable/grafana
+# helm list
+# kubectl  get deployments.
+# kubectl  get service
+# helm delete prometheus
+# helm delete grafana
+# helm list
+# helm reset
+```
