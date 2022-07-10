@@ -80,6 +80,8 @@ spec:
 
 #### Criando os arquivos de services
 
+`# kubectl create -f svc-app1.yml`
+
 ```yml
 apiVersion: v1
 kind: Service
@@ -94,7 +96,9 @@ spec:
     app: app1
 ```
 
-- E agopra criando mais um arquivo de service:
+- E agora criando mais um arquivo de service:
+
+`# kubectl create -f svc-app2.yml`
 
 ```yml
 apiVersion: v1
