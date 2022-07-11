@@ -113,3 +113,45 @@ spec:
   selector:
     app: app2
 ```
+
+- Vamos agora criar outro arquivo de deployment que e de extrema importancia:
+
+`# kubectl create -f default-backend.yml`
+
+```yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: default-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: default-backend
+  template:
+    metadata:
+      labels:
+        app: default-backend
+    spec:
+      terminationGracePeriodSeconds: 60
+      containers:
+      - name: default-backend
+        image: gcr.io/google_containers/defaultbackend:1.0
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 30
+          timeoutSeconds: 5
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            cpu: 10m
+            memory: 20Mi
+          requests:
+            cpu: 10m
+            memory: 20Mi
+```
+
