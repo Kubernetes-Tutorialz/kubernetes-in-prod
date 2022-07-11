@@ -8,6 +8,7 @@
     - [Ingress (Parte01)](#ingress-parte01)
       - [Criando os arquivos de deployments](#criando-os-arquivos-de-deployments)
       - [Criando os arquivos de services](#criando-os-arquivos-de-services)
+      - [Alguns termos importantes](#alguns-termos-importantes)
 
 
 ## Ingress (Abertura da Aula)
@@ -154,4 +155,28 @@ spec:
             cpu: 10m
             memory: 20Mi
 ```
+
+#### Alguns termos importantes
+
+- `terminationGracePeriodSeconds` => Tempo em segundos que ele irá aguardar o pod ser finalizado com o sinal SIGTERM, antes de realizar a finalização forçada com o sinal de SIGKILL.
+- `livenessProbe` => Verifica se o pod continua em execução, caso não esteja, o kubelet irá remover o contêiner e iniciará outro em seu lugar.
+
+- Agora temos que criar mais um arquivo de services que vai servir de backend para nossas apps.
+
+`kubectl create -f default-backend-service.yaml -n ingress `
+
+```yml
+apiVersion: v1
+kind: Service
+metadata:
+  name: default-backend
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: default-backend
+```
+
 
