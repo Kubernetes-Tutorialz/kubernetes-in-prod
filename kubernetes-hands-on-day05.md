@@ -160,10 +160,14 @@ spec:
 
 - `terminationGracePeriodSeconds` => Tempo em segundos que ele irá aguardar o pod ser finalizado com o sinal SIGTERM, antes de realizar a finalização forçada com o sinal de SIGKILL.
 - `livenessProbe` => Verifica se o pod continua em execução, caso não esteja, o kubelet irá remover o contêiner e iniciará outro em seu lugar.
+- `readnessProbe` => Verifica se o container está pronto para receber requisições vindas do service.
+- `initialDelaySeconds` => Diz ao kubelet quantos segundos ele deverá aguardar para realizar a execução da primeira checagem da livenessProbe.
+- `timeoutSeconds` => Tempo em segundos que será considerado o timeout da execução da probe, o valor padrão é 1.
+- `periodSeconds` => Determina de quanto em quanto tempo será realizada a verificação do livenessProbe.
 
 - Agora temos que criar mais um arquivo de services que vai servir de backend para nossas apps.
 
-`kubectl create -f default-backend-service.yaml -n ingress `
+`kubectl create -f default-backend-service.yaml -n ingress`
 
 ```yml
 apiVersion: v1
@@ -178,5 +182,11 @@ spec:
   selector:
     app: default-backend
 ```
+
+- Criando nosso namespace:
+
+`# kubectl create namespace ingress`
+
+
 
 
