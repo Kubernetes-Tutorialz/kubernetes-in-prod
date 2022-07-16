@@ -5,6 +5,8 @@ O projeto Kubernetes foi desenvolvido pela Google, em meados de 2014, para atuar
 ## Um projeto da CNCF
 O [Kubernetes](https://www.cncf.io/projects/kubernetes/) foi aceito na CNCF em 2016 e hoje é um projeto graduado e super utilizado em projetos e empresas ao redor do mundo.
 
+![k8s-cluster](images/kubernetes01.png)
+
 ## Executar Kubernetes localmente
 
 Assim como os demais orquestradores disponíveis, o k8s também segue um modelo master/worker, constituindo assim um cluster, onde para seu funcionamento devem existir no mínimo três nós: o nó master, responsável (por padrão) pelo gerenciamento do cluster, e os demais como workers, executores das aplicações que queremos executar sobre esse cluster.
