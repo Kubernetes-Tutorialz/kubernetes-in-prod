@@ -2,6 +2,9 @@
 
 O projeto Kubernetes foi desenvolvido pela Google, em meados de 2014, para atuar como um orquestrador de contêineres para a empresa. O Kubernetes (k8s), cujo termo em Grego significa "timoneiro", é um projeto open source que conta com design e desenvolvimento baseados no projeto Borg, que também é da Google. Alguns outros produtos disponíveis no mercado, tais como o Apache Mesos e o Cloud Foundry, também surgiram a partir do projeto Borg.
 
+## Um projeto da CNCF
+O [Kubernetes](https://www.cncf.io/projects/kubernetes/) foi aceito na CNCF em 2016 e hoje é um projeto graduado e super utilizado em projetos e empresas ao redor do mundo.
+
 ## Executar Kubernetes localmente
 
 Assim como os demais orquestradores disponíveis, o k8s também segue um modelo master/worker, constituindo assim um cluster, onde para seu funcionamento devem existir no mínimo três nós: o nó master, responsável (por padrão) pelo gerenciamento do cluster, e os demais como workers, executores das aplicações que queremos executar sobre esse cluster.
