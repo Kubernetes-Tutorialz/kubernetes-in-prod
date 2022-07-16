@@ -22,7 +22,7 @@ Embora exista a exigência de no mínimo três nós para a execução do k8s em 
 [k0s](https://k0sproject.io/): Desenvolvido pela Mirantis, mesma empresa que adquiriu a parte enterprise do Docker. É uma distribuição do Kubernetes com todos os recursos necessários para funcionar em um único binário, que proporciona uma simplicidade na instalação e manutenção do cluster. A pronúncia é correta é kay-zero-ess e tem por objetivo reduzir o esforço técnico e desgaste na instalação de um cluster Kubernetes, por isso o seu nome faz alusão a Zero Friction. O k0s pode ser utilizado em ambientes de produção
 
 
-## Instalação do Kind
+## Comece pelo Kind
 Para instalar o Kind na sua maquineta local, e ter um cluster de Kubernetes rodando, siga os passos abaixos:
 
 ```yml
