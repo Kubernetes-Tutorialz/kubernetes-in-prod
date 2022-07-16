@@ -32,6 +32,20 @@ nodes:
 - role: worker
 ```
 
+### Alguns comandos
+- Para que seja possiivel criar seu cluster siga os passos abaixo:
+
+`# kind create cluster --config kind/kind/kind-cluster-3-nodes.yaml`
+
+- Obtendo o status dos nodes do cluster:
+
+```bash
+# kubectl get nodes
+NAME                 STATUS   ROLES                  AGE     VERSION
+kind-control-plane   Ready    control-plane,master   3h20m   v1.21.1
+kind-worker          Ready    <none>                 3h19m   v1.21.1
+kind-worker2         Ready    <none>                 3h19m   v1.21.1
+```
 
 ## Componentes do Kubernetes
 
